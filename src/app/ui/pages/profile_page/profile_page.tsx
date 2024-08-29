@@ -1,14 +1,25 @@
 "use client"
-import { useEffect } from "react"
+import clsx from "clsx"
+import { useEffect, useState } from "react"
+import { animatedShadow } from "../../classname"
+import { DataCard } from "./data_card"
 
-export function ProfilePage(){
+export function ProfilePage() {
     var app: WebApp | undefined
-    useEffect(()=>{
+    const [InitedWebData,SetInitedWebData] = useState("")
+    useEffect(() => {
         app = window.Telegram?.WebApp
-    },[])
-    return <main className="min-h-dvh">
-        <div className={'bg-stone-900 h-16 mx-2 mt-2 rounded-2xl p-2'}></div>
-        <div className={'bg-stone-900 h-16 mx-2 mt-2 rounded-2xl p-2'}></div>
-        <div className={'bg-stone-900 h-16 mx-2 mt-2 rounded-2xl p-2'}></div>
+        SetInitedWebData(app.initData)
+    }, [])
+    return <main className={'min-h-dvh text-white'}>
+        <DataCard ImageSource={"/logos/gi_logo.png"} GameName={"Genshin Impact"}/>
+        <DataCard ImageSource={"/logos/hsr_logo.png"} GameName={"Honkai Star Rail"}/>
+        <div className={'bg-stone-900 h-32 mx-2 mt-2 rounded-2xl p-2'}>
+            <p className={
+                clsx(
+                    animatedShadow,
+                )
+            }>{InitedWebData}</p>
+        </div>
     </main>
 }
