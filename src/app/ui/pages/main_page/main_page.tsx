@@ -2,9 +2,9 @@
 import { Card } from "@/app/ui/card";
 import { useState } from "react";
 import { CgShoppingCart } from "react-icons/cg";
-import { borderAnimStyle } from "../classname";
-import { Types } from "../types/types_for";
-import { Filter_game } from "../filter_game";
+import { borderAnimStyle } from "../../classname";
+import { Types } from "../../types/types_for";
+import { Filter_game } from "../../filter_game";
 
 const CardData = [{
     name: "60 примогемов",

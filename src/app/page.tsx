@@ -1,5 +1,5 @@
 
-import MainPage from "@/app/ui/main_page/main_page";
+import MainPage from "@/app/ui/pages/main_page/main_page";
 
 export default function Home() {
 
