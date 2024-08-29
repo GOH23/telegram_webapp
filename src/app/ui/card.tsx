@@ -32,7 +32,7 @@ export function Card({ value, name,imagePath }: { value: number, name: string,im
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         className={clsx(
-            'rounded h-auto bg-stone-900  cursor-pointer relative z-10 max-w-80',
+            'rounded h-auto bg-stone-900  cursor-pointer relative z-10 max-w-44',
             animatedShadow
         )}
         onClick={() => {
@@ -44,7 +44,7 @@ export function Card({ value, name,imagePath }: { value: number, name: string,im
         <AnimetedIcon IsStateOpened={IsSuccessOpened} Icon={FcLike} SetStateOpened={SetIsSuccessOpened} />
         <AnimetedIcon IsStateOpened={IsDeletedOpened} Icon={FcDislike} SetStateOpened={SetIsDeletedOpened} />
         <div className="p-2">
-            <img src={imagePath} alt={""} className="w-full h-52" />
+            <img src={imagePath} alt={""} className="w-full h-42" />
             <p className="text-white text-center font-bold min-h-5">{name}</p>
             <div className='flex h-10 flex-row justify-between text-white text-center font-bold'>
                 <div className="flex justify-center items-center"><p className=''>{value} руб</p></div>
