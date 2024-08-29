@@ -32,7 +32,7 @@ export function Card({ value, name,imagePath }: { value: number, name: string,im
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         className={clsx(
-            'rounded h-auto bg-stone-900  cursor-pointer relative z-10',
+            'rounded h-auto bg-stone-900  cursor-pointer relative z-10 max-w-80',
             animatedShadow
         )}
         onClick={() => {
