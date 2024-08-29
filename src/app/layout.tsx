@@ -5,7 +5,6 @@ import Head from "next/head";
 import Script from "next/script";
 import { Header } from "./ui/header";
 
-
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -21,12 +20,13 @@ export default function RootLayout({
 
   return (
     <html lang="en">
-
+      <Head>
+        <Script src="https://telegram.org/js/telegram-web-app.js" />
+      </Head>
       <body className={inter.className + " bg-stone-950"}>
 
         <Header />
         {children}
-
       </body>
     </html>
   );
