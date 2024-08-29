@@ -4,8 +4,9 @@ import { useEffect, useState } from "react"
 import { animatedShadow } from "../../classname"
 import { DataCard } from "./data_card"
 import { retrieveLaunchParams } from "@telegram-apps/sdk"
+import useTelegramInitData from "../../hooks/useTelegramInitData"
 export function ProfilePage() {
-
+    const initData = useTelegramInitData();
 
     useEffect(() => {
 
@@ -18,7 +19,7 @@ export function ProfilePage() {
                 clsx(
                     animatedShadow,
                 )
-            }></p>
+            }>{JSON.stringify(initData, null, 2)}</p>
         </div>
     </main>
 }
