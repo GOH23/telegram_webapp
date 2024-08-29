@@ -1,10 +1,11 @@
-import { useState } from "react"
-import { borderAnimStyle } from "./classname";
+import { useEffect, useState } from "react"
+import { animatedShadow, borderAnimStyle } from "./classname";
 import { AnimatePresence, motion } from 'framer-motion'
 import { FcDislike, FcLike } from "react-icons/fc";
 import { IconType } from "react-icons";
 import { BiMinus } from "react-icons/bi";
-function AnimetedIcon({ IsStateOpened, SetStateOpened,Icon }: { IsStateOpened: boolean, SetStateOpened: (state: boolean) => void,Icon: IconType }) {
+import clsx from "clsx";
+function AnimetedIcon({ IsStateOpened, SetStateOpened,Icon }: { IsStateOpened: boolean, SetStateOpened: (state: boolean) => void,Icon: IconType,ImagePath?: string }) {
     if (IsStateOpened) {
         return (<motion.div
             initial={{ opacity: 0 }}
@@ -18,23 +19,32 @@ function AnimetedIcon({ IsStateOpened, SetStateOpened,Icon }: { IsStateOpened: b
         </motion.div>)
     }
 }
-export function Card({ value, name }: { value: number, name: string }) {
+
+export function Card({ value, name,imagePath }: { value: number, name: string,imagePath: string }) {
+    
+    useEffect(()=>{
+        
+    })
     const [SelectedCount, SetSelectedCount] = useState(0)
     const [IsSuccessOpened, SetIsSuccessOpened] = useState(false)
     const [IsDeletedOpened, SetIsDeletedOpened] = useState(false)
     return (<motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        className='rounded h-auto bg-stone-900 hover:shadow-md cursor-pointer relative z-10'
+        className={clsx(
+            'rounded h-auto bg-stone-900  cursor-pointer relative z-10',
+            animatedShadow
+        )}
         onClick={() => {
             SetSelectedCount(SelectedCount + 1)
             SetIsSuccessOpened(true)
         }}
     >
+        
         <AnimetedIcon IsStateOpened={IsSuccessOpened} Icon={FcLike} SetStateOpened={SetIsSuccessOpened} />
         <AnimetedIcon IsStateOpened={IsDeletedOpened} Icon={FcDislike} SetStateOpened={SetIsDeletedOpened} />
         <div className="p-2">
-            <img src={"./60-kristallov-1675329753.webp"} alt={""} className="w-full h-52" />
+            <img src={imagePath} alt={""} className="w-full h-52" />
             <p className="text-white text-center font-bold min-h-5">{name}</p>
             <div className='flex h-10 flex-row justify-between text-white text-center font-bold'>
                 <div className="flex justify-center items-center"><p className=''>{value} руб</p></div>
