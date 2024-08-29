@@ -4,6 +4,7 @@ import '@/app/ui/global.css'
 import Head from "next/head";
 import Script from "next/script";
 import { Header } from "./ui/header";
+import { Suspense } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,9 +25,11 @@ export default function RootLayout({
         <Script src="https://telegram.org/js/telegram-web-app.js" />
       </Head>
       <body className={inter.className + " bg-stone-950"}>
+        <Suspense>
+          <Header />
+          {children}
+        </Suspense>
 
-        <Header />
-        {children}
       </body>
     </html>
   );
