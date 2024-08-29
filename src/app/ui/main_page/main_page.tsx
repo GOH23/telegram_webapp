@@ -47,7 +47,7 @@ export default function MainPage() {
         <main className="min-h-dvh">
             <Filter_game/>
             <div className="flex flex-row pt-10 flex-wrap items-stretch justify-center  md:gap-5 gap-2">
-                {CardData.map((el,ind)=><Card {...el} value={Number(el.value)}/>)}
+                {CardData.map((el,ind)=><Card {...el} key={ind} value={Number(el.value)}/>)}
             </div>
             <div className={'fixed bottom-0 right-0 cursor-pointer m-5 text-6xl p-2 text-white bg-cyan-600 size-auto flex rounded-xl z-50'+borderAnimStyle}>
                 <CgShoppingCart/>
