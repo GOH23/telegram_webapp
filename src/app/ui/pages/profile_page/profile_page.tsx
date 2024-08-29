@@ -3,13 +3,12 @@ import clsx from "clsx"
 import { useEffect, useState } from "react"
 import { animatedShadow } from "../../classname"
 import { DataCard } from "./data_card"
-
+import { retrieveLaunchParams } from "@telegram-apps/sdk"
 export function ProfilePage() {
-    var app: WebApp | undefined
-    const [InitedWebData,SetInitedWebData] = useState("")
+
+    const { initDataRaw } = retrieveLaunchParams()
     useEffect(() => {
-        app = window.Telegram?.WebApp
-        SetInitedWebData(app.initData)
+
     }, [])
     return <main className={'min-h-dvh text-white'}>
         <DataCard ImageSource={"/logos/gi_logo.png"} GameName={"Genshin Impact"}/>
@@ -19,7 +18,7 @@ export function ProfilePage() {
                 clsx(
                     animatedShadow,
                 )
-            }>{InitedWebData}</p>
+            }>{initDataRaw}</p>
         </div>
     </main>
 }
