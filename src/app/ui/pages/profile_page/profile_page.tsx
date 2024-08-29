@@ -3,10 +3,10 @@ import clsx from "clsx"
 import { useEffect, useState } from "react"
 import { animatedShadow } from "../../classname"
 import { DataCard } from "./data_card"
-import { retrieveLaunchParams } from "@telegram-apps/sdk"
-import useTelegramInitData from "../../hooks/useTelegramInitData"
+
+
 export function ProfilePage() {
-    const initData = useTelegramInitData();
+
 
     useEffect(() => {
 
@@ -19,7 +19,7 @@ export function ProfilePage() {
                 clsx(
                     animatedShadow,
                 )
-            }>{JSON.stringify(initData, null, 2)}</p>
+            }></p>
         </div>
     </main>
 }

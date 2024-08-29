@@ -5,7 +5,7 @@ import { CgShoppingCart } from "react-icons/cg";
 import { borderAnimStyle } from "../../classname";
 import { Types } from "../../types/types_for";
 import { Filter_game } from "../../filter_game";
-
+import { useSearchParams } from 'next/navigation'
 const CardData = [{
     name: "60 примогемов",
     value: 1000,
@@ -43,6 +43,8 @@ const CardData = [{
 }]
 export default function MainPage() {
     const [SelectedType, SetSelectedType] = useState(Types[0])
+    const searchParams = useSearchParams()
+    console.log(searchParams)
     return (
         <main className="min-h-dvh">
             <Filter_game/>
