@@ -1,6 +1,6 @@
 'use client'
 import { Card } from "@/app/ui/card";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CgShoppingCart } from "react-icons/cg";
 import { borderAnimStyle } from "../../classname";
 import { Types } from "../../types/types_for";
@@ -44,15 +44,22 @@ const CardData = [{
 export default function MainPage() {
     const [SelectedType, SetSelectedType] = useState(Types[0])
     const searchParams = useSearchParams()
-    console.log(searchParams)
+    useEffect(()=>{
+        searchParams.forEach((el)=>{
+            alert(el);
+        })
+    },[])
     return (
         <main className="min-h-dvh">
             <Filter_game/>
+            {}
             <div className="flex flex-row pt-10 flex-wrap items-stretch justify-center  md:gap-5 gap-2">
                 {CardData.map((el,ind)=><Card {...el} key={ind} value={Number(el.value)}/>)}
+                
             </div>
             <div className={'fixed bottom-0 right-0 cursor-pointer m-5 text-6xl p-2 text-white bg-cyan-600 size-auto flex rounded-xl z-50'+borderAnimStyle}>
                 <CgShoppingCart/>
+
             </div>
         </main>
     );
