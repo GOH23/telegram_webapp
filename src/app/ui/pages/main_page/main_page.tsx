@@ -52,7 +52,7 @@ export default function MainPage() {
         <main className="min-h-dvh">
             <Filter_game />
             <p>
-              {initDataRaw}  
+
             </p>
             <div className="flex flex-row pt-10 flex-wrap items-stretch justify-center  md:gap-5 gap-2">
                 {CardData.map((el, ind) => <Card {...el} key={ind} value={Number(el.value)} />)}
