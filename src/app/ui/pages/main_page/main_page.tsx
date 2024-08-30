@@ -1,12 +1,13 @@
 'use client'
 import { Card } from "@/app/ui/card";
-import { useEffect, useState } from "react";
+import { AwaitedReactNode, JSXElementConstructor, ReactElement, ReactNode, useEffect, useState } from "react";
 import { CgShoppingCart } from "react-icons/cg";
 import { borderAnimStyle } from "../../classname";
 import { Types } from "../../types/types_for";
 import { Filter_game } from "../../filter_game";
 import { useSearchParams } from 'next/navigation'
-import { retrieveLaunchParams } from "@telegram-apps/sdk"
+import { LaunchParams, retrieveLaunchParams } from "@telegram-apps/sdk"
+import { notFound } from 'next/navigation'
 const CardData = [{
     name: "60 примогемов",
     value: 1000,
@@ -44,15 +45,22 @@ const CardData = [{
 }]
 export default function MainPage() {
     const [SelectedType, SetSelectedType] = useState(Types[0])
-    const {initDataRaw} = retrieveLaunchParams();
-    useEffect(() => {
 
-    }, [])
+    let lauchParam: LaunchParams | undefined = undefined
+    useEffect(()=>{
+        try{
+            lauchParam = retrieveLaunchParams()
+        }catch{
+            if(!lauchParam){
+                notFound()
+            }
+        }
+    },[])    
     return (
         <main className="min-h-dvh">
             <Filter_game />
             <p>
-
+                {(lauchParam as unknown as LaunchParams)?.initDataRaw}
             </p>
             <div className="flex flex-row pt-10 flex-wrap items-stretch justify-center  md:gap-5 gap-2">
                 {CardData.map((el, ind) => <Card {...el} key={ind} value={Number(el.value)} />)}
