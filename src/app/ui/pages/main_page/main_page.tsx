@@ -46,12 +46,12 @@ const CardData = [{
 }]
 export default function MainPage({userData}: {userData : any}) {
     const [SelectedType, SetSelectedType] = useState(Types[0])
-
+    const [UserData,SetUserData] = useState(userData)
     return (
         <main className="min-h-dvh">
             <Filter_game />
-            <p>
-                {userData}
+            <p className='text-white'>
+                {UserData}
             </p>
             <div className="flex flex-row pt-10 flex-wrap items-stretch justify-center  md:gap-5 gap-2">
                 {CardData.map((el, ind) => <Card {...el} key={ind} value={Number(el.value)} />)}
