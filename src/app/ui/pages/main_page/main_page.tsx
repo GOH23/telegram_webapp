@@ -45,13 +45,13 @@ const CardData = [{
 }]
 export default function MainPage() {
     const [SelectedType, SetSelectedType] = useState(Types[0])
+    const [LaunchParam,SetLaunchParam] = useState<LaunchParams | undefined>()
 
-    let lauchParam: LaunchParams | undefined = undefined
     useEffect(()=>{
         try{
-            lauchParam = retrieveLaunchParams()
+            SetLaunchParam(retrieveLaunchParams())
         }catch{
-            if(!lauchParam){
+            if(!LaunchParam){
                 notFound()
             }
         }
@@ -60,7 +60,7 @@ export default function MainPage() {
         <main className="min-h-dvh">
             <Filter_game />
             <p>
-                {(lauchParam as unknown as LaunchParams)?.initDataRaw}
+                {LaunchParam?.initDataRaw}
             </p>
             <div className="flex flex-row pt-10 flex-wrap items-stretch justify-center  md:gap-5 gap-2">
                 {CardData.map((el, ind) => <Card {...el} key={ind} value={Number(el.value)} />)}
