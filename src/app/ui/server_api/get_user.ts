@@ -13,7 +13,8 @@ export async function get_user(): Promise<any | undefined> {
                 initData: retrieveLaunchParams().initDataRaw
             })
         })).json()
-    } catch {
+    } catch (e) {
+        
         return undefined;
     }
 
