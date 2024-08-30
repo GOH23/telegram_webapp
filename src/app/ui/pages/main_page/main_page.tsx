@@ -8,6 +8,7 @@ import { Filter_game } from "../../filter_game";
 import { useSearchParams } from 'next/navigation'
 import { LaunchParams, retrieveLaunchParams } from "@telegram-apps/sdk"
 import { notFound } from 'next/navigation'
+import { get_user } from "../../server_api/get_user";
 const CardData = [{
     name: "60 примогемов",
     value: 1000,
@@ -43,20 +44,9 @@ const CardData = [{
     type: Types[0].name,
     imagePath: ""
 }]
-export default function MainPage() {
+export default function MainPage({userData}: {userData : any}) {
     const [SelectedType, SetSelectedType] = useState(Types[0])
-    const [LaunchParam,SetLaunchParam] = useState<LaunchParams | undefined>()
-
-    useEffect(()=>{
-        try{
-            SetLaunchParam(retrieveLaunchParams())
-            alert(LaunchParam)
-        }catch{
-            if(!LaunchParam){
-                notFound()
-            }
-        }
-    },[])    
+   
     return (
         <main className="min-h-dvh">
             <Filter_game />
