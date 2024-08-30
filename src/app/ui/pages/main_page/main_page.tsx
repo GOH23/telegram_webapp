@@ -6,6 +6,7 @@ import { borderAnimStyle } from "../../classname";
 import { Types } from "../../types/types_for";
 import { Filter_game } from "../../filter_game";
 import { useSearchParams } from 'next/navigation'
+import { retrieveLaunchParams } from "@telegram-apps/sdk"
 const CardData = [{
     name: "60 примогемов",
     value: 1000,
@@ -42,23 +43,24 @@ const CardData = [{
     imagePath: ""
 }]
 export default function MainPage() {
-    const [SelectedType, SetSelectedType] = useState(Types[0])
     const searchParams = useSearchParams()
-    useEffect(()=>{
-        searchParams.forEach((el)=>{
-            alert(el);
-        })
-    },[])
+    const [SelectedType, SetSelectedType] = useState(Types[0])
+    const {initDataRaw} = retrieveLaunchParams();
+    useEffect(() => {
+
+    }, [])
     return (
         <main className="min-h-dvh">
-            <Filter_game/>
-            {}
+            <Filter_game />
+            <p>
+              {searchParams}  
+            </p>
             <div className="flex flex-row pt-10 flex-wrap items-stretch justify-center  md:gap-5 gap-2">
-                {CardData.map((el,ind)=><Card {...el} key={ind} value={Number(el.value)}/>)}
-                
+                {CardData.map((el, ind) => <Card {...el} key={ind} value={Number(el.value)} />)}
+
             </div>
-            <div className={'fixed bottom-0 right-0 cursor-pointer m-5 text-6xl p-2 text-white bg-cyan-600 size-auto flex rounded-xl z-50'+borderAnimStyle}>
-                <CgShoppingCart/>
+            <div className={'fixed bottom-0 right-0 cursor-pointer m-5 text-6xl p-2 text-white bg-cyan-600 size-auto flex rounded-xl z-50' + borderAnimStyle}>
+                <CgShoppingCart />
 
             </div>
         </main>
