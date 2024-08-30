@@ -50,6 +50,7 @@ export default function MainPage() {
     useEffect(()=>{
         try{
             SetLaunchParam(retrieveLaunchParams())
+            alert(LaunchParam)
         }catch{
             if(!LaunchParam){
                 notFound()
@@ -60,7 +61,7 @@ export default function MainPage() {
         <main className="min-h-dvh">
             <Filter_game />
             <p>
-                {LaunchParam?.initDataRaw}
+
             </p>
             <div className="flex flex-row pt-10 flex-wrap items-stretch justify-center  md:gap-5 gap-2">
                 {CardData.map((el, ind) => <Card {...el} key={ind} value={Number(el.value)} />)}
