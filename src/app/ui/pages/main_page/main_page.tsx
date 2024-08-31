@@ -8,7 +8,7 @@ import { Filter_game } from "../../filter_game";
 import { useSearchParams } from 'next/navigation'
 import { LaunchParams, retrieveLaunchParams } from "@telegram-apps/sdk"
 import { notFound } from 'next/navigation'
-import { get_user } from "../../server_api/get_user";
+import { get_URL, get_user } from "../../server_api/get_user";
 const CardData = [{
     name: "60 примогемов",
     value: 10,
