@@ -9,6 +9,7 @@ import { useSearchParams } from 'next/navigation'
 import { LaunchParams, retrieveLaunchParams } from "@telegram-apps/sdk"
 import { notFound } from 'next/navigation'
 import { get_URL, get_user } from "../../server_api/get_user";
+import axios from 'axios'
 const CardData = [{
     name: "60 примогемов",
     value: 10,
@@ -51,23 +52,19 @@ export default function MainPage() {
         notFound()
     }
     useEffect(()=>{
-        fetch(get_URL("/auth/login"), {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                initData: tg.initData
-            })
-        }).then(async (res)=>{
-            SetData(await res.json())
+        axios.post(get_URL("/auth/login"),{
+            initData: tg.initData
+        }).then((res)=>{
+            SetData(res.data)
         })
+        
     },[])
     return (
         <main className="min-h-dvh">
             <Filter_game />
             <p className='text-white'>
                 {tg.initData}
+                {Data}
             </p>
             <div className="flex flex-row pt-10 flex-wrap items-stretch justify-center  md:gap-5 gap-2">
                 {CardData.map((el, ind) => <Card {...el} key={ind} value={Number(el.value)} />)}
