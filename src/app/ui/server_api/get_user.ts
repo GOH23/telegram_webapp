@@ -1,4 +1,4 @@
-"use server"
+
 import { LaunchParams, retrieveLaunchParams, } from "@telegram-apps/sdk";
 import { postEvent } from '@telegram-apps/sdk';
 const get_URL = (pathUrl?: string) => {
