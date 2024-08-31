@@ -1,7 +1,7 @@
 
 import { LaunchParams, retrieveLaunchParams, } from "@telegram-apps/sdk";
 import { postEvent } from '@telegram-apps/sdk';
-const get_URL = (pathUrl?: string) => {
+export const get_URL = (pathUrl?: string) => {
     return `http://localhost:3001${pathUrl}`
 }
 export function get_user(): Promise<any> {

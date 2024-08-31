@@ -49,7 +49,17 @@ export default function MainPage() {
     if(tg == null){
         notFound()
     }
-
+    useEffect(()=>{
+        fetch(get_URL("/auth/login"), {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                initData: tg.initData
+            })
+        })
+    },[])
     return (
         <main className="min-h-dvh">
             <Filter_game />
@@ -67,3 +77,5 @@ export default function MainPage() {
         </main>
     );
 }
+
+
