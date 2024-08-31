@@ -37,26 +37,24 @@ const CardData = [{
     value: "",
     type: Types[0].name,
     imagePath: ""
-}
-    , {
+}, {
     name: "",
     value: "",
     type: Types[0].name,
     imagePath: ""
 }]
+const tg = window.Telegram?.WebApp
 export default function MainPage() {
     const [SelectedType, SetSelectedType] = useState(Types[0])
-    const [UserData,SetUserData] = useState()
-    useEffect(()=>{
-        get_user().then((res)=>{
-            SetUserData(res.data)
-        })
-    },[])
+    if(tg == null){
+        notFound()
+    }
+
     return (
         <main className="min-h-dvh">
             <Filter_game />
             <p className='text-white'>
-                {UserData}
+                {tg.initData}
             </p>
             <div className="flex flex-row pt-10 flex-wrap items-stretch justify-center  md:gap-5 gap-2">
                 {CardData.map((el, ind) => <Card {...el} key={ind} value={Number(el.value)} />)}
