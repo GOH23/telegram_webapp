@@ -11,7 +11,7 @@ import { notFound } from 'next/navigation'
 import { get_user } from "../../server_api/get_user";
 const CardData = [{
     name: "60 примогемов",
-    value: 1000,
+    value: 10,
     type: Types[0].name,
     imagePath: "60-kristallov-1675329753.webp"
 },
@@ -44,9 +44,14 @@ const CardData = [{
     type: Types[0].name,
     imagePath: ""
 }]
-export default function MainPage({userData}: {userData : any}) {
+export default function MainPage() {
     const [SelectedType, SetSelectedType] = useState(Types[0])
-    const [UserData,SetUserData] = useState(userData)
+    const [UserData,SetUserData] = useState()
+    useEffect(()=>{
+        get_user().then((res)=>{
+            SetUserData(res.data)
+        })
+    },[])
     return (
         <main className="min-h-dvh">
             <Filter_game />
