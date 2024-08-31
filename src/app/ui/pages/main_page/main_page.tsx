@@ -46,6 +46,7 @@ const CardData = [{
 const tg = window.Telegram?.WebApp
 export default function MainPage() {
     const [SelectedType, SetSelectedType] = useState(Types[0])
+    const [Data, SetData] = useState(null)
     if(tg == null){
         notFound()
     }
@@ -58,6 +59,8 @@ export default function MainPage() {
             body: JSON.stringify({
                 initData: tg.initData
             })
+        }).then(async (res)=>{
+            SetData(await res.json())
         })
     },[])
     return (
