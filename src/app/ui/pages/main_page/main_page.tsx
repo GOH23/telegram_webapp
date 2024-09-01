@@ -44,11 +44,10 @@ const CardData = [{
     type: Types[0].name,
     imagePath: ""
 }]
-var tg = window.Telegram?.WebApp
+var tg = window.Telegram.WebApp
 export default function MainPage() {
     const [SelectedType, SetSelectedType] = useState(Types[0])
     const [Data, SetData] = useState(null)
-    console.log(tg)
     if(tg == null){
         notFound()
     }
