@@ -47,7 +47,7 @@ const CardData = [{
 var tg = window.Telegram.WebApp
 export default function MainPage() {
     const [SelectedType, SetSelectedType] = useState(Types[0])
-    const [Data, SetData] = useState(null)
+    const [Data, SetData] = useState()
     if (tg == null) {
         notFound()
     }
@@ -64,7 +64,7 @@ export default function MainPage() {
             <Filter_game />
             <p className='text-white'>
                 {tg.initData}
-                {Data}
+                {JSON.stringify(Data)}
             </p>
             <div className="flex flex-row pt-10 flex-wrap items-stretch justify-center  md:gap-5 gap-2">
                 {CardData.map((el, ind) => <Card {...el} key={ind} value={Number(el.value)} />)}
