@@ -51,7 +51,14 @@ export default function MainPage() {
     if(tg == null){
         notFound()
     }
-    tg.showAlert(`Добро пожаловать, @${tg.version}.`);
+    useEffect(()=>{
+        axios.post(get_URL("/auth/login"),{
+            initData: tg.initData
+        }).then((res)=>{
+            SetData(res.data)
+        })
+    },[])
+    tg.showAlert(`Добро пожаловать, @${Data}.`);
     return (
         <main className="min-h-dvh">
             <Filter_game />
