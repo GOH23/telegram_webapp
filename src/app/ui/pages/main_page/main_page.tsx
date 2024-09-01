@@ -52,7 +52,7 @@ export default function MainPage() {
     if(tg == null){
         notFound()
     }
-    
+    tg.showAlert(`Добро пожаловать, @${tg.version}.`);
     return (
         <main className="min-h-dvh">
             <Filter_game />
