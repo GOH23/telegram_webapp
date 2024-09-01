@@ -48,17 +48,17 @@ var tg = window.Telegram.WebApp
 export default function MainPage() {
     const [SelectedType, SetSelectedType] = useState(Types[0])
     const [Data, SetData] = useState(null)
-    if(tg == null){
+    if (tg == null) {
         notFound()
     }
-    useEffect(()=>{
-        axios.post(get_URL("/auth/login"),{
+    useEffect(() => {
+        axios.post(get_URL("/auth/login"), {
             initData: tg.initData
-        }).then((res)=>{
+        }).then((res) => {
             SetData(res.data)
         })
-    },[])
-    tg.showAlert(`Добро пожаловать, @${Data}.`);
+    }, [])
+
     return (
         <main className="min-h-dvh">
             <Filter_game />
@@ -71,7 +71,7 @@ export default function MainPage() {
 
             </div>
             <div className={'fixed bottom-0 right-0 cursor-pointer m-5 text-6xl p-2 text-white bg-cyan-600 size-auto flex rounded-xl z-50' + borderAnimStyle}>
-                <CgShoppingCart />
+                <CgShoppingCart onClick={() => tg.showAlert(`Добро пожаловать, @${Data}.`)}/>
 
             </div>
         </main>
