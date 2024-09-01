@@ -52,12 +52,7 @@ export default function MainPage() {
         notFound()
     }
     useEffect(()=>{
-        axios.post(get_URL("/auth/login"),{
-            initData: tg.initData
-        }).then((res)=>{
-            SetData(res.data)
-        })
-        
+
     },[])
     return (
         <main className="min-h-dvh">
