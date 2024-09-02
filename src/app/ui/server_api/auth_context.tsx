@@ -12,7 +12,7 @@ const PostFetcher = (url: string, { arg }: { arg: { initData: string } }) => fet
     body: JSON.stringify(arg)
 }).then(r => r.json())
 const GetFetcher = (url: string,) => fetch(get_URL(url)).then(r => r.json())
-type LoginType ={
+type LoginType = {
     token: string,
     user: User
 }
@@ -29,8 +29,8 @@ export default function AuthProvider({
 }: Readonly<{
     children: React.ReactNode;
 }>) {
-    const [LoadingState,SetLoadingState] = useState(true)
-    const { data,trigger,error } = useSWRMutation('/auth/login', PostFetcher)
+    const [LoadingState, SetLoadingState] = useState(true)
+    const { data, trigger } = useSWRMutation('/auth/login', PostFetcher)
     useEffect(() => {
         try {
             trigger({
@@ -42,22 +42,17 @@ export default function AuthProvider({
             SetLoadingState(false)
         }
     }, [])
-    if(LoadingState){
-        return(<div>Loading...</div>)
-    }
-    if(error){
-        return(<div>{JSON.stringify(error)}</div>)
+    if (LoadingState) {
+        return (<div>Loading...</div>)
     }
     return (<SWRConfig value={{
         fallback: {
             web_app: tg,
             loadingState: LoadingState,
-            login_data: data
+            //login_data: data
         }
     }}>
-        <Suspense fallback={<div>Loading...</div>}>
-            {children}
-        </Suspense>
+        {children}
     </SWRConfig>);
 }
 export { PostFetcher, GetFetcher }
