@@ -1,6 +1,6 @@
 "use client"
 import { notFound } from "next/navigation";
-import { Suspense, useEffect } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { SWRConfig } from 'swr'
 import useSWR from 'swr'
 
@@ -29,22 +29,29 @@ export default function AuthProvider({
 }: Readonly<{
     children: React.ReactNode;
 }>) {
-
-    const { data,trigger } = useSWRMutation('/auth/login', PostFetcher)
+    const [LoadingState,SetLoadingState] = useState(true)
+    const { data,trigger,error } = useSWRMutation('/auth/login', PostFetcher)
     useEffect(() => {
         try {
             trigger({
                 initData: tg.initData
             })
+            SetLoadingState(false)
         }
         catch {
-
+            SetLoadingState(false)
         }
     }, [])
+    if(LoadingState){
+        return(<div>Loading...</div>)
+    }
+    if(error){
+        return(<div>{JSON.stringify(error)}</div>)
+    }
     return (<SWRConfig value={{
         fallback: {
             web_app: tg,
-            loadingState: false,
+            loadingState: LoadingState,
             login_data: data
         }
     }}>
