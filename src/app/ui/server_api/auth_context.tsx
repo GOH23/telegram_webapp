@@ -40,7 +40,7 @@ export default function AuthProvider({
         try {
             axios.post(get_URL('/auth/login'), {
                 body: JSON.stringify({
-
+                    initData: tg.WebApp.initData
                 }),
                 headers: {
                     'Content-Type': 'application/json'
