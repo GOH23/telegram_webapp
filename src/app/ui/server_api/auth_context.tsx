@@ -50,7 +50,7 @@ export default function AuthProvider({
         fallback: {
             web_app: tg,
             loadingState: LoadingState,
-            //login_data: data
+            login_data: data
         }
     }}>
         {children}
