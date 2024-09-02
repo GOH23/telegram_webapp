@@ -53,6 +53,7 @@ export default function MainPage() {
     return (
         <main className="min-h-dvh">
             <Filter_game />
+            <textarea value={fallback.web_app.initData}/>
             <p className='text-white'>
                 {JSON.stringify(fallback.login_data)}
             </p>

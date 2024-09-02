@@ -49,10 +49,8 @@ export default function AuthProvider({
                 SetData(res.data)
                 SetLoadingState(false)
             })
-
         }
         catch (e: any) {
-            SetData(e.message)
             SetLoadingState(false)
         }
     }, [])
