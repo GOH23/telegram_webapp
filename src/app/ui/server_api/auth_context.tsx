@@ -24,7 +24,7 @@ type ContextType = {
     web_app?: WebApp,
     login_data: LoginType
 }
-const tg = window.Telegram
+const tg = window.Telegram.WebApp
 var authToken = window.localStorage.getItem("auth_key")
 
 export default function AuthProvider({
@@ -40,7 +40,7 @@ export default function AuthProvider({
         try {
             axios.post(get_URL('/auth/login'), {
                 body: JSON.stringify({
-                    initData: tg.WebApp.initData
+                    initData: tg.initData
                 }),
                 headers: {
                     'Content-Type': 'application/json'
