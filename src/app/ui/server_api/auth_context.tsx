@@ -24,7 +24,7 @@ type ContextType = {
     web_app?: WebApp,
     login_data: LoginType
 }
-
+const tg = window.Telegram
 var authToken = window.localStorage.getItem("auth_key")
 
 export default function AuthProvider({
@@ -32,7 +32,7 @@ export default function AuthProvider({
 }: Readonly<{
     children: React.ReactNode;
 }>) {
-    var tg = window.Telegram
+
     const [Data,SetData] = useState([])
     const [LoadingState, SetLoadingState] = useState(true)
     //const { data, trigger } = useSWRMutation('/auth/login', PostFetcher)
