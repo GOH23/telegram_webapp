@@ -47,6 +47,7 @@ export default function AuthProvider({
                 }
             }).then(res => {
                 SetData(res.data)
+            }).finally(()=>{
                 SetLoadingState(false)
             })
         }
