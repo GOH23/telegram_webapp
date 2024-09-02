@@ -33,14 +33,9 @@ export default function AuthProvider({
     const { data,trigger } = useSWRMutation('/auth/login', PostFetcher)
     useEffect(() => {
         try {
-            if (!authToken) {
-                trigger({
-                    initData: tg.initData
-                })
-            } else {
-
-            }
-
+            trigger({
+                initData: tg.initData
+            })
         }
         catch {
 
@@ -50,7 +45,7 @@ export default function AuthProvider({
         fallback: {
             web_app: tg,
             loadingState: false,
-            login_data: data as LoginType
+            login_data: data
         }
     }}>
         <Suspense fallback={<div>Loading...</div>}>
