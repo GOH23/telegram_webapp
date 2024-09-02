@@ -45,11 +45,14 @@ export default function AuthProvider({
                 headers: {
                     'Content-Type': 'application/json'
                 }
-            }).then(res => SetData(res.data))
-            SetLoadingState(false)
+            }).then(res => {
+                SetData(res.data)
+                SetLoadingState(false)
+            })
+
         }
         catch (e: any) {
-            
+            SetData(e.message)
             SetLoadingState(false)
         }
     }, [])
