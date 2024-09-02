@@ -16,8 +16,8 @@ export function Header() {
                     animatedShadow,
                 )
             }>Sadovolk Store</p>
-            <a href={""} className={
-                clsx('')
+            <a href={"https://t.me/sadovolk_store"} className={
+                clsx('bg-cyan-600 text-1xl text-white')
             } type="blank">Наш телеграм</a>
             <Link href={'/profile'} className={' ml-auto '}>
                 <RxAvatar className={'text-4xl'} />

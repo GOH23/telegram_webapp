@@ -1,15 +1,12 @@
 'use client'
 import { Card } from "@/app/ui/card";
-import { AwaitedReactNode, JSXElementConstructor, ReactElement, ReactNode, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { CgShoppingCart } from "react-icons/cg";
 import { borderAnimStyle } from "../../classname";
 import { Types } from "../../types/types_for";
 import { Filter_game } from "../../filter_game";
-import { useSearchParams } from 'next/navigation'
-import { LaunchParams, retrieveLaunchParams } from "@telegram-apps/sdk"
-import { notFound } from 'next/navigation'
-import { get_URL, get_user } from "../../server_api/get_user";
-import axios from 'axios'
+import { useSWRConfig } from "swr";
+
 const CardData = [{
     name: "60 примогемов",
     value: 10,
@@ -44,34 +41,25 @@ const CardData = [{
     type: Types[0].name,
     imagePath: ""
 }]
-var tg = window.Telegram.WebApp
+
 export default function MainPage() {
+    const config = useSWRConfig()
     const [SelectedType, SetSelectedType] = useState(Types[0])
     const [Data, SetData] = useState()
-    if (tg == null) {
-        notFound()
-    }
-    useEffect(() => {
-        axios.post(get_URL("/auth/login"), {
-            initData: tg.initData
-        }).then((res) => {
-            SetData(res.data)
-        })
-    }, [])
+
 
     return (
         <main className="min-h-dvh">
             <Filter_game />
             <p className='text-white'>
-                {tg.initData}
-                {JSON.stringify(Data)}
+                {JSON.stringify(config)}
             </p>
             <div className="flex flex-row pt-10 flex-wrap items-stretch justify-center  md:gap-5 gap-2">
                 {CardData.map((el, ind) => <Card {...el} key={ind} value={Number(el.value)} />)}
 
             </div>
             <div className={'fixed bottom-0 right-0 cursor-pointer m-5 text-6xl p-2 text-white bg-cyan-600 size-auto flex rounded-xl z-50' + borderAnimStyle}>
-                <CgShoppingCart onClick={() => tg.showAlert(`Добро пожаловать, @${Data}.`)}/>
+                <CgShoppingCart />
 
             </div>
         </main>

@@ -21,10 +21,7 @@ function AnimetedIcon({ IsStateOpened, SetStateOpened,Icon }: { IsStateOpened: b
 }
 
 export function Card({ value, name,imagePath }: { value: number, name: string,imagePath: string }) {
-    
-    useEffect(()=>{
-        
-    })
+
     const [SelectedCount, SetSelectedCount] = useState(0)
     const [IsSuccessOpened, SetIsSuccessOpened] = useState(false)
     const [IsDeletedOpened, SetIsDeletedOpened] = useState(false)
@@ -32,7 +29,7 @@ export function Card({ value, name,imagePath }: { value: number, name: string,im
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         className={clsx(
-            'rounded h-auto bg-stone-900  cursor-pointer relative z-10 max-w-44',
+            'rounded h-auto bg-stone-900  cursor-pointer relative z-10 w-44 max-w-44',
             animatedShadow
         )}
         onClick={() => {
