@@ -25,7 +25,6 @@ export default function RootLayout({
     <html lang="en">
       <Script
         src="https://telegram.org/js/telegram-web-app.js"
-        strategy="afterInteractive"
       />
       <body className={inter.className + " bg-stone-950"}>
         <Suspense>
