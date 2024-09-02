@@ -8,7 +8,7 @@ import useSWRMutation from 'swr/mutation'
 import { get_URL } from "./get_user";
 import { User } from "@telegram-apps/sdk";
 import axios from "axios";
-const PostFetcher = (url: string, { arg }: { arg: { initData: string } }) => axios.post(get_URL(url), {
+const PostFetcher = (url: string, arg: any ) => axios.post(get_URL(url), {
     body: JSON.stringify(arg),
     headers: {
         'Content-Type': 'application/json'
@@ -33,16 +33,23 @@ export default function AuthProvider({
     children: React.ReactNode;
 }>) {
     var tg = window.Telegram
+    const [Data,SetData] = useState([])
     const [LoadingState, SetLoadingState] = useState(true)
-    const { data, trigger } = useSWRMutation('/auth/login', PostFetcher)
+    //const { data, trigger } = useSWRMutation('/auth/login', PostFetcher)
     useEffect(() => {
         try {
-            trigger({
-                initData: tg.WebApp.initData
-            })
+            axios.post(get_URL('/auth/login'), {
+                body: JSON.stringify({
+
+                }),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }).then(res => SetData(res.data))
             SetLoadingState(false)
         }
-        catch {
+        catch (e: any) {
+            
             SetLoadingState(false)
         }
     }, [])
@@ -53,7 +60,7 @@ export default function AuthProvider({
         fallback: {
             web_app: tg,
             loadingState: LoadingState,
-            login_data: [data]
+            login_data: [Data]
         }
     }}>
         {children}
