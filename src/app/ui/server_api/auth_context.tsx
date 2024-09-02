@@ -21,7 +21,7 @@ type ContextType = {
     web_app?: WebApp,
     login_data: LoginType
 }
-var tg = window.Telegram?.WebApp
+var tg = window.Telegram.WebApp
 var authToken = window.localStorage.getItem("auth_key")
 
 export default function AuthProvider({
