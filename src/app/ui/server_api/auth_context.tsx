@@ -7,13 +7,13 @@ import useSWR from 'swr'
 import useSWRMutation from 'swr/mutation'
 import { get_URL } from "./get_user";
 import { User } from "@telegram-apps/sdk";
-const PostFetcher = (url: string, { arg }: { arg: { initData: string } }) => fetch(get_URL(url), {
-    method: 'POST',
+import axios from "axios";
+const PostFetcher = (url: string, { arg }: { arg: { initData: string } }) => axios.post(get_URL(url), {
     body: JSON.stringify(arg),
     headers: {
         'Content-Type': 'application/json'
     }
-}).then(r => r.json())
+}).then(res => res.data)
 const GetFetcher = (url: string,) => fetch(get_URL(url)).then(r => r.json())
 type LoginType = {
     token: string,
