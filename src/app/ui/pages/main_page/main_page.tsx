@@ -54,7 +54,7 @@ export default function MainPage() {
         <main className="min-h-dvh">
             <Filter_game />
             <p className='text-white'>
-                {config.fallback.web_app?.initData}
+                {config.fallback.web_app.WebApp.initData}
             </p>
             <div className="flex flex-row pt-10 flex-wrap items-stretch justify-center  md:gap-5 gap-2">
                 {CardData.map((el, ind) => <Card {...el} key={ind} value={Number(el.value)} />)}
