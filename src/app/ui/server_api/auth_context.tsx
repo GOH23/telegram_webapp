@@ -9,7 +9,10 @@ import { get_URL } from "./get_user";
 import { User } from "@telegram-apps/sdk";
 const PostFetcher = (url: string, { arg }: { arg: { initData: string } }) => fetch(get_URL(url), {
     method: 'POST',
-    body: JSON.stringify(arg)
+    body: JSON.stringify(arg),
+    headers: {
+        'Content-Type': 'application/json'
+    }
 }).then(r => r.json())
 const GetFetcher = (url: string,) => fetch(get_URL(url)).then(r => r.json())
 type LoginType = {
