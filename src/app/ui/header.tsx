@@ -6,7 +6,7 @@ import { animatedShadow } from "./classname";
 import Link from "next/link";
 
 export function Header() {
-    
+
 
     const [SelectedMenu, SetSelectedMenu] = useState(0);
     return (<header className={'bg-stone-900 h-16 mx-2 mt-2 rounded-2xl p-2'}>
@@ -17,11 +17,13 @@ export function Header() {
                 )
             }>Sadovolk Store</p>
             <a href={"https://t.me/sadovolk_store"} className={
-                clsx('bg-cyan-600 text-1xl text-white')
+                clsx('bg-cyan-600 text-lg p-1 mx-2 sm:block hidden rounded-md hover:bg-cyan-700 transition-all duration-1000 text-white')
             } type="blank">Наш телеграм</a>
-            <Link href={'/profile'} className={' ml-auto '}>
-                <RxAvatar className={'text-4xl'} />
-            </Link>
+            <div className={' ml-auto '}>
+                <Link href={'/profile'}>
+                    <RxAvatar className={'text-4xl'} />
+                </Link>
+            </div>
         </nav>
     </header>)
 }

@@ -22,7 +22,7 @@ type LoginType = {
 type ContextType = {
     loadingState: boolean,
     web_app?: WebApp,
-    login_data: LoginType
+    login_data: any
 }
 const tg = window.Telegram.WebApp
 var authToken = window.localStorage.getItem("auth_key")
@@ -69,5 +69,5 @@ export default function AuthProvider({
     </SWRConfig>);
 }
 export { PostFetcher, GetFetcher }
-
+export type {ContextType,LoginType}
 

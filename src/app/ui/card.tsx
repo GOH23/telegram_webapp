@@ -3,8 +3,9 @@ import { animatedShadow, borderAnimStyle } from "./classname";
 import { AnimatePresence, motion } from 'framer-motion'
 import { FcDislike, FcLike } from "react-icons/fc";
 import { IconType } from "react-icons";
-import { BiMinus } from "react-icons/bi";
+
 import clsx from "clsx";
+import { CardType } from "./types/shop_cart_type";
 function AnimetedIcon({ IsStateOpened, SetStateOpened,Icon }: { IsStateOpened: boolean, SetStateOpened: (state: boolean) => void,Icon: IconType,ImagePath?: string }) {
     if (IsStateOpened) {
         return (<motion.div
@@ -20,7 +21,7 @@ function AnimetedIcon({ IsStateOpened, SetStateOpened,Icon }: { IsStateOpened: b
     }
 }
 
-export function Card({ value, name,imagePath }: { value: number, name: string,imagePath: string }) {
+export function Card({ value, name,imagePath,addToShopCart }: { value: number, name: string,imagePath: string,addToShopCart:(cardData: CardType)=>void }) {
 
     const [SelectedCount, SetSelectedCount] = useState(0)
     const [IsSuccessOpened, SetIsSuccessOpened] = useState(false)
@@ -34,7 +35,12 @@ export function Card({ value, name,imagePath }: { value: number, name: string,im
         )}
         onClick={() => {
             SetSelectedCount(SelectedCount + 1)
+            addToShopCart({
+                id: 0,
+                count: SelectedCount
+            })
             SetIsSuccessOpened(true)
+            
         }}
     >
         
@@ -56,6 +62,10 @@ export function Card({ value, name,imagePath }: { value: number, name: string,im
                         onClick={(e) => {
                             e.stopPropagation();
                             SetSelectedCount(SelectedCount - 1)
+                            addToShopCart({
+                                id: 0,
+                                count: SelectedCount
+                            })
                             SetIsDeletedOpened(true)
                         }}>
                         <p>-</p>
