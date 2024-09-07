@@ -75,11 +75,7 @@ export default function MainPage() {
 
     return (
         <main className="min-h-dvh">
-            <p onClick={() => {
-                web_app?.sendData(JSON.stringify({
-                    result: "flex flex-row pt-10 flex-wrap items-stretch justify-center  md:gap-5 gap-2"
-                }))
-            }}>Выберите игру для показа товаров</p>
+            <p >Выберите игру для показа товаров</p>
             <FilterSelect onChange={() => SetSelectedType} SelectedGame={SelectedType} />
             {/* <textarea value={fallback.web_app.initData}/>
             <p className='text-white'>
@@ -91,10 +87,13 @@ export default function MainPage() {
             </div>
             <Badge count={5}>
                 <div className={'fixed bottom-0 right-0 cursor-pointer m-5 text-6xl p-2 text-white bg-slate-700 size-auto flex rounded-xl z-50' + borderAnimStyle}>
-                    <CgShoppingCart onClick={() => SetShopCartState({
-                        ...ShopCartState,
-                        openState: !ShopCartState.openState
-                    })} />
+                    <CgShoppingCart onClick={() => {
+                        SetShopCartState({
+                            ...ShopCartState,
+                            openState: !ShopCartState.openState
+                        })
+
+                    }} />
 
                 </div>
             </Badge>
@@ -117,7 +116,7 @@ export default function MainPage() {
                         ...ShopCartState,
                         openState: !ShopCartState.openState
                     })} />
-                    <ShopCartButton />
+                    <ShopCartButton/>
                 </motion.div>}
             </AnimatePresence>
 
