@@ -38,7 +38,6 @@ export default function AuthProvider({
     //const { data, trigger } = useSWRMutation('/auth/login', PostFetcher)
     useEffect(() => {
         try {
-            tg.showAlert(tg.initData)
             axios.post(get_URL('/auth/login'), {
                 body: JSON.stringify({
                     initData: tg.initData
