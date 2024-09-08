@@ -40,10 +40,11 @@ export default function AuthProvider({
         try {
             axios.post(get_URL('/auth/login'), {
                 body: JSON.stringify({
-                    initData: tg.initData
+                    initData: "user=%7B%22id%22%3A1464799579%2C%22first_name%22%3A%22Daniil%22%2C%22last_name%22%3A%22%22%2C%22username%22%3A%22goh222%22%2C%22language_code%22%3A%22en%22%2C%22allows_write_to_pm%22%3Atrue%7D&chat_instance=-3883608311451396396&chat_type=sender&auth_date=1725811122&hash=327936a46be4ac7bb58c934df00d9f66befe53b22237943a7f370ac5451bb734"
                 }),
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': 'https://telegram-sell-bot.vercel.app'
                 }
             }).then(res => {
                 SetData(res.data)
