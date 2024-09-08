@@ -6,16 +6,8 @@ import useSWR from 'swr'
 
 import useSWRMutation from 'swr/mutation'
 import { get_URL } from "./get_user";
-import { User } from "@telegram-apps/sdk";
-type LoginType = {
-    token: string,
-    user: User
-}
-type ContextType = {
-    loadingState: boolean,
-    web_app?: WebApp,
-    login_data: any
-}
+
+
 const tg = window.Telegram.WebApp
 
 var authToken = window.localStorage.getItem("auth_key")
@@ -52,5 +44,4 @@ export default function AuthProvider({
     </SWRConfig>);
 }
 
-export type { ContextType, LoginType }
 

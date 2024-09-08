@@ -1,5 +1,6 @@
 import { useSWRConfig } from "swr";
-import { ContextType } from "./auth_context";
+import { ContextType } from "../types/types_for";
+
 
 export function useConfig(){
     const { fallback } = useSWRConfig()
