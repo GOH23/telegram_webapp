@@ -76,7 +76,7 @@ export default function MainPage() {
             <p className='text-white'>
                 {JSON.stringify(fallback.login_data)}
             </p> */}
-            <p>{login_data}</p>
+            <p>{JSON.stringify(login_data)}</p>
             <div className="flex flex-row pt-10 flex-wrap items-stretch justify-center  md:gap-5 gap-2">
                 {CardData.map((el, ind) => <Card {...el} key={ind}  value={Number(el.value)} />)}
 
