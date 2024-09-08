@@ -64,6 +64,7 @@ export default function MainPage() {
     })
 
     const { web_app, login_data, loadingState } = useConfig()
+    console.log(login_data)
     useEffect(() => {
 
     }, [])
