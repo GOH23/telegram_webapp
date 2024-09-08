@@ -16,12 +16,8 @@ type ContextType = {
     web_app?: WebApp,
     login_data: any
 }
+const tg = window.Telegram.WebApp
 
-try{
-
-}catch{
-  
-}
 var authToken = window.localStorage.getItem("auth_key")
 const fetcher = (url: string,data: string) => fetch(url, {
     method: "POST",
@@ -37,14 +33,9 @@ export default function AuthProvider({
 }: Readonly<{
     children: React.ReactNode;
 }>) {
-    const [tg,setTg] = useState<WebApp>()
-    useEffect(()=>{try{
-        setTg(window.Telegram.WebApp)
-    }catch{
-        setTg(undefined)
-    }},[])
+
     //const { data, trigger } = useSWRMutation('/auth/login', PostFetcher)
-    const { data,isLoading,error } = useSWR(get_URL('/auth/login'), (url)=>fetcher(url,tg!.initData))
+    const { data,isLoading,error } = useSWR(get_URL('/auth/login'), (url)=>fetcher(url,tg.initData))
 
 
     if (isLoading) {
