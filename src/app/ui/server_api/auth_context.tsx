@@ -33,10 +33,8 @@ export default function AuthProvider({
     children: React.ReactNode;
 }>) {
 
-    const [Data, SetData] = useState([])
-    const [LoadingState, SetLoadingState] = useState(true)
     //const { data, trigger } = useSWRMutation('/auth/login', PostFetcher)
-    const { data,isLoading } = useSWR(get_URL('/auth/login'), (url)=>fetcher(url,tg.initData))
+    const { data,isLoading,error } = useSWR(get_URL('/auth/login'), (url)=>fetcher(url,tg.initData))
 
 
     if (isLoading) {
@@ -46,7 +44,7 @@ export default function AuthProvider({
         fallback: {
             web_app: tg,
             loadingState: isLoading,
-            login_data: data
+            login_data: error
         }
     }}>
         {children}
