@@ -45,7 +45,7 @@ export default function AuthProvider({
         fallback: {
             web_app: tg,
             loadingState: isLoading,
-            login_data: error
+            login_data: data
         }
     }}>
         {children}
