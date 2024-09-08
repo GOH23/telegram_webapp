@@ -14,6 +14,7 @@ export function ShopCartButton() {
             web_app?.sendData(JSON.stringify({
                 result: "flex flex-row pt-10 flex-wrap items-stretch justify-center  md:gap-5 gap-2"
             }))
+            web_app?.close()
         }}>
         Подтвердить
     </button>)

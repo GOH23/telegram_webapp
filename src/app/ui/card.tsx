@@ -6,6 +6,7 @@ import { IconType } from "react-icons";
 
 import clsx from "clsx";
 import { CardType } from "./types/shop_cart_type";
+import { useConfig } from "./server_api/useConfig";
 function AnimetedIcon({ IsStateOpened, SetStateOpened,Icon }: { IsStateOpened: boolean, SetStateOpened: (state: boolean) => void,Icon: IconType,ImagePath?: string }) {
     if (IsStateOpened) {
         return (<motion.div
@@ -21,11 +22,13 @@ function AnimetedIcon({ IsStateOpened, SetStateOpened,Icon }: { IsStateOpened: b
     }
 }
 
-export function Card({ value, name,imagePath,addToShopCart }: { value: number, name: string,imagePath: string,addToShopCart:(cardData: CardType)=>void }) {
+export function Card({ value, name,imagePath }: { value: number, name: string,imagePath: string }) {
 
     const [SelectedCount, SetSelectedCount] = useState(0)
     const [IsSuccessOpened, SetIsSuccessOpened] = useState(false)
     const [IsDeletedOpened, SetIsDeletedOpened] = useState(false)
+    const { web_app } = useConfig()
+
     return (<motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -34,13 +37,11 @@ export function Card({ value, name,imagePath,addToShopCart }: { value: number, n
             animatedShadow
         )}
         onClick={() => {
-            SetSelectedCount(SelectedCount + 1)
-            addToShopCart({
-                id: 0,
-                count: SelectedCount
-            })
             SetIsSuccessOpened(true)
-            
+            web_app?.sendData(JSON.stringify({
+                result: "flex flex-row pt-10 flex-wrap items-stretch justify-center  md:gap-5 gap-2"
+            }))
+            web_app?.close()
         }}
     >
         
@@ -61,24 +62,21 @@ export function Card({ value, name,imagePath,addToShopCart }: { value: number, n
                         transition={{ duration: .1 }}
                         onClick={(e) => {
                             e.stopPropagation();
-                            SetSelectedCount(SelectedCount - 1)
-                            addToShopCart({
-                                id: 0,
-                                count: SelectedCount
-                            })
+
+
                             SetIsDeletedOpened(true)
                         }}>
                         <p>-</p>
                     </motion.button>}
                 </AnimatePresence>
             </div>
-            <AnimatePresence>
+            {/* <AnimatePresence>
                 {SelectedCount != 0 &&
                     <motion.div initial={{ scale: 0, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0, opacity: 0 }} transition={{ duration: 1, type: 'spring' }} className='absolute w-6 h-6 flex justify-center bg-red-700 text-gray-50 -top-2 -right-2 rounded-full'>
                         <p>{SelectedCount}</p>
                     </motion.div>
                 }
-            </AnimatePresence>
+            </AnimatePresence> */}
         </div>
 
     </motion.div>)

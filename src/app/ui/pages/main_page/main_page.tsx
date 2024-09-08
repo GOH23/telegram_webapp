@@ -62,12 +62,7 @@ export default function MainPage() {
         openState: true,
         ShopCart: []
     })
-    const addCount = (card: CardType) => {
-        SetShopCartState({
-            ...ShopCartState,
-            ShopCart: [...ShopCartState.ShopCart, card]
-        })
-    }
+
     const { web_app, login_data, loadingState } = useConfig()
     useEffect(() => {
 
@@ -81,11 +76,12 @@ export default function MainPage() {
             <p className='text-white'>
                 {JSON.stringify(fallback.login_data)}
             </p> */}
+            <p>{login_data}</p>
             <div className="flex flex-row pt-10 flex-wrap items-stretch justify-center  md:gap-5 gap-2">
-                {CardData.map((el, ind) => <Card {...el} key={ind} addToShopCart={() => addCount} value={Number(el.value)} />)}
+                {CardData.map((el, ind) => <Card {...el} key={ind}  value={Number(el.value)} />)}
 
             </div>
-            <Badge count={5}>
+            {/* <Badge count={5}>
                 <div className={'fixed bottom-0 right-0 cursor-pointer m-5 text-6xl p-2 text-white bg-slate-700 size-auto flex rounded-xl z-50' + borderAnimStyle}>
                     <CgShoppingCart onClick={() => {
                         SetShopCartState({
@@ -96,9 +92,9 @@ export default function MainPage() {
                     }} />
 
                 </div>
-            </Badge>
+            </Badge> */}
 
-            <AnimatePresence>
+            {/* <AnimatePresence>
                 {ShopCartState.openState && <motion.div
                     initial={{ opacity: 0, y: 500 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -118,7 +114,7 @@ export default function MainPage() {
                     })} />
                     <ShopCartButton/>
                 </motion.div>}
-            </AnimatePresence>
+            </AnimatePresence> */}
 
         </main>
     );
