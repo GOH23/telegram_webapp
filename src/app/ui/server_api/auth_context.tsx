@@ -55,6 +55,7 @@ export default function AuthProvider({
             SetLoadingState(false)
         }
     }, [])
+
     if (LoadingState) {
         return (<div>Loading...</div>)
     }
