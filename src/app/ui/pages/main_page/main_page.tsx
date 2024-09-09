@@ -70,11 +70,7 @@ export default function MainPage() {
         <main className="min-h-dvh">
             <p >Выберите игру для показа товаров</p>
             <FilterSelect  SelectedType={SelectedType} OnSetState={SetSelectedType} isLoading={isLoading} gameData={gameData} />
-            {/* <textarea value={fallback.web_app.initData}/>
-            <p className='text-white'>
-                {JSON.stringify(fallback.login_data)}
-            </p> */}
-            {JSON.stringify(data)}
+
             <div className="flex flex-row pt-10 flex-wrap items-stretch justify-center  md:gap-5 gap-2">
                 {CardData.map((el, ind) => <Card {...el} key={ind}  value={Number(el.value)} />)}
 
