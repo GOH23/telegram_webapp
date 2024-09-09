@@ -61,11 +61,11 @@ export default function MainPage() {
 
     const {login_data : {token}} = useConfig()
     const {isLoading,gameData} = useGameData(token)
-    const [SelectedType, SetSelectedType] = useState(gameData[0])
+    const [SelectedType, SetSelectedType] = useState(0)
     return (
         <main className="min-h-dvh">
             <p >Выберите игру для показа товаров</p>
-            <FilterSelect  onChange={() => SetSelectedType} SelectedGame={SelectedType} isLoading={isLoading} gameData={gameData} />
+            <FilterSelect   isLoading={isLoading} gameData={gameData} />
             {/* <textarea value={fallback.web_app.initData}/>
             <p className='text-white'>
                 {JSON.stringify(fallback.login_data)}

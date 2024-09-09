@@ -3,9 +3,9 @@ import { Select } from "antd"
 import { Dispatch, SetStateAction } from "react"
 import clsx from "clsx"
 import { gameType } from "./server_api/useGameData"
-export function FilterSelect({ onChange, SelectedGame,isLoading,gameData}: {
+export function FilterSelect({ isLoading,gameData}: {
 
-    onChange: Dispatch<SetStateAction<gameType>>, SelectedGame: gameType,isLoading: boolean,gameData: gameType[]
+    isLoading: boolean,gameData: gameType[]
 }) {
 
     if(isLoading){ 
@@ -13,7 +13,7 @@ export function FilterSelect({ onChange, SelectedGame,isLoading,gameData}: {
     }
     return (<>
     <Select
-        onChange={onChange}
+
         options={gameData.map((el) => {
             return {
                 value: el.gameName, label: <span className={clsx(
@@ -23,7 +23,6 @@ export function FilterSelect({ onChange, SelectedGame,isLoading,gameData}: {
         })}
         showSearch
         optionFilterProp="value"
-        defaultValue={SelectedGame}
         className={
 
             clsx(" mx-2 mt-2 *:text-white select_box")
