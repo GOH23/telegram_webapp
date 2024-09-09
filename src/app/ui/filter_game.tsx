@@ -1,3 +1,4 @@
+"use client"
 import { Select } from "antd"
 import { Types } from "./types/types_for"
 import { Dispatch, SetStateAction, useState } from "react"
@@ -13,7 +14,8 @@ export function FilterSelect({ onChange, SelectedGame,web_app }: {
         name: string;
     }>>, SelectedGame: any
 }) {
-    const { data,isLoading,error } = useSWR(get_URL('/games'), (url) => fetcherGET(url,useCloudService(web_app,"token")))
+    const tokendata = useCloudService(web_app,"token")
+    const { data,isLoading,error } = useSWR(get_URL('/games'), (url) => fetcherGET(url,tokendata))
     if(isLoading){ 
         return(<div>Skeleton</div>)
     }

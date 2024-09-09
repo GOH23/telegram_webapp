@@ -9,7 +9,7 @@ const useCloudService = (web_app: WebApp,nameVal: string) =>{
     }catch{
 
     }
-    web_app.showAlert(cloud)
+
     return cloud
 }
 export {useCloudService}
