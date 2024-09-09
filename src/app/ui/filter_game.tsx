@@ -1,37 +1,29 @@
 "use client"
 import { Select } from "antd"
-import { Types } from "./types/types_for"
-import { Dispatch, SetStateAction, useState } from "react"
+import { Dispatch, SetStateAction } from "react"
 import clsx from "clsx"
-import useSWR from "swr";
-import { fetcherGET, get_URL } from "./server_api/apiFetcher";
-import { useCloudService } from "./server_api/useCloudService";
-import { useConfig } from "./server_api/useConfig";
-export function FilterSelect({ onChange, SelectedGame}: {
+import { gameType } from "./server_api/useGameData"
+export function FilterSelect({ onChange, SelectedGame,isLoading,gameData}: {
 
-    onChange: Dispatch<SetStateAction<{
-        id: number;
-        name: string;
-    }>>, SelectedGame: any
+    onChange: Dispatch<SetStateAction<gameType>>, SelectedGame: gameType,isLoading: boolean,gameData: gameType[]
 }) {
-    const {login_data : {token}} = useConfig()
-    const { data,isLoading,error } = useSWR(get_URL('/games'), (url) => fetcherGET(url,token))
+
     if(isLoading){ 
         return(<div>Skeleton</div>)
     }
     return (<>
     <Select
         onChange={onChange}
-        options={Types.map((el) => {
+        options={gameData.map((el) => {
             return {
-                value: el.name, label: <span className={clsx(
+                value: el.gameName, label: <span className={clsx(
                     'text-white'
-                )}>{el.name}</span>
+                )}>{el.gameName}</span>
             }
         })}
         showSearch
         optionFilterProp="value"
-        defaultValue={SelectedGame.name}
+        defaultValue={SelectedGame}
         className={
 
             clsx(" mx-2 mt-2 *:text-white select_box")
@@ -42,7 +34,5 @@ export function FilterSelect({ onChange, SelectedGame}: {
 
 
     />
-    <p>{JSON.stringify(data)}</p>
-    <p>{JSON.stringify(error)}</p>
     </>)
 }

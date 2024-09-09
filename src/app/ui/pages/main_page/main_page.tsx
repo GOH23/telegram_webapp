@@ -14,8 +14,8 @@ import { ShopCartButton } from "./shopcartbutton";
 import { CardType } from "../../types/shop_cart_type";
 import { Badge } from "antd";
 import { useConfig } from "../../server_api/useConfig";
-import { useCloudService } from "../../server_api/useCloudService";
-import { fetcherGET, get_URL } from "../../server_api/apiFetcher";
+import { useGameData } from "../../server_api/useGameData";
+
 const CardData = [{
     id: 0,
     name: "60 примогемов",
@@ -58,13 +58,14 @@ const CardData = [{
 }]
 
 export default function MainPage() {
-    const [SelectedType, SetSelectedType] = useState(Types[0])
-    const {web_app,loadingState} = useConfig()
 
+    const {login_data : {token}} = useConfig()
+    const {isLoading,gameData} = useGameData(token)
+    const [SelectedType, SetSelectedType] = useState(gameData[0])
     return (
         <main className="min-h-dvh">
             <p >Выберите игру для показа товаров</p>
-            <FilterSelect  onChange={() => SetSelectedType} SelectedGame={SelectedType} />
+            <FilterSelect  onChange={() => SetSelectedType} SelectedGame={SelectedType} isLoading={isLoading} gameData={gameData} />
             {/* <textarea value={fallback.web_app.initData}/>
             <p className='text-white'>
                 {JSON.stringify(fallback.login_data)}
