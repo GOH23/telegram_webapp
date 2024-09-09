@@ -63,6 +63,7 @@ export default function MainPage() {
     const {login_data : {token}} = useConfig()
     const {isLoading,gameData} = useGameData(token)
     const [SelectedType, SetSelectedType] = useState(0)
+    if(isLoading){return <div></div>}
     const { data,  error } = useSWR(get_URL(`/product?name=${gameData[SelectedType]}`), (url) => fetcherGET(url, token))
 
     return (
