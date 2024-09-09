@@ -57,17 +57,7 @@ const CardData = [{
 
 export default function MainPage() {
     const [SelectedType, SetSelectedType] = useState(Types[0])
-    const [Data, SetData] = useState()
-    const [ShopCartState, SetShopCartState] = useState<{ openState: boolean, ShopCart: CardType[] }>({
-        openState: true,
-        ShopCart: []
-    })
-
     const { web_app, login_data, loadingState } = useConfig()
-
-    useEffect(() => {
-
-    }, [])
 
     return (
         <main className="min-h-dvh">
@@ -77,9 +67,7 @@ export default function MainPage() {
             <p className='text-white'>
                 {JSON.stringify(fallback.login_data)}
             </p> */}
-            <p className={"text-white"}>{login_data?.message}</p>
-            <p className={"text-white"}>{JSON.stringify(login_data)}</p>
-            <p className={"text-white"}>{web_app.initData}</p>
+
             <div className="flex flex-row pt-10 flex-wrap items-stretch justify-center  md:gap-5 gap-2">
                 {CardData.map((el, ind) => <Card {...el} key={ind}  value={Number(el.value)} />)}
 

@@ -6,7 +6,7 @@ type LoginType = {
 type ContextType = {
     loadingState: boolean,
     web_app: WebApp,
-    login_data: any
+    login_data: { token: string,user: any}
 }
 export const Types = [
     { id: 1, name: 'Genshin Impact' },
