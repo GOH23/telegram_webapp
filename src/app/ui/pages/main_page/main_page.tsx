@@ -15,6 +15,7 @@ import { CardType } from "../../types/shop_cart_type";
 import { Badge } from "antd";
 import { useConfig } from "../../server_api/useConfig";
 import { useGameData } from "../../server_api/useGameData";
+import { fetcherGET, get_URL } from "../../server_api/apiFetcher";
 
 const CardData = [{
     id: 0,
@@ -62,6 +63,8 @@ export default function MainPage() {
     const {login_data : {token}} = useConfig()
     const {isLoading,gameData} = useGameData(token)
     const [SelectedType, SetSelectedType] = useState(0)
+    const { data,  error } = useSWR(get_URL(`/product?name=${gameData[SelectedType]}`), (url) => fetcherGET(url, token))
+
     return (
         <main className="min-h-dvh">
             <p >Выберите игру для показа товаров</p>
@@ -70,7 +73,7 @@ export default function MainPage() {
             <p className='text-white'>
                 {JSON.stringify(fallback.login_data)}
             </p> */}
-
+            {JSON.stringify(data)}
             <div className="flex flex-row pt-10 flex-wrap items-stretch justify-center  md:gap-5 gap-2">
                 {CardData.map((el, ind) => <Card {...el} key={ind}  value={Number(el.value)} />)}
 
