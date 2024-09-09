@@ -4,17 +4,12 @@ import { useEffect, useState } from "react"
 import { animatedShadow } from "../../classname"
 import { DataCard } from "./data_card"
 import { useConfig } from "../../server_api/useConfig"
+import { useCloudService } from "../../server_api/useCloudService"
 
 
 export function ProfilePage() {
     const { web_app, login_data, loadingState } = useConfig()
-    try{
-        web_app.CloudStorage.getItem("token",(er,val)=>{
-            web_app.showAlert(val ?? "Ошибка")
-        })
-    }catch{
-        
-    }
+    const data = useCloudService(web_app,"token")
     return <main className={'min-h-dvh text-white'}>
         <DataCard ImageSource={"/logos/gi_logo.png"} GameName={"Genshin Impact"} />
         <DataCard ImageSource={"/logos/hsr_logo.png"} GameName={"Honkai Star Rail"} />
@@ -31,7 +26,7 @@ export function ProfilePage() {
                 clsx(
                     animatedShadow,
                 )
-            }></p>
+            }>{data}</p>
         </div>
     </main>
 }
