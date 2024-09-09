@@ -27,7 +27,7 @@ export default function AuthProvider({
 }>) {
 
     //const { data, trigger } = useSWRMutation('/auth/login', PostFetcher)
-    const { data, isLoading, error } = useSWR(get_URL('/auth/login'), (url) => fetcher(url, "query_id=AAFbEU9XAAAAAFsRT1eqiju9&user=%7B%22id%22%3A1464799579%2C%22first_name%22%3A%22Daniil%22%2C%22last_name%22%3A%22%22%2C%22username%22%3A%22goh222%22%2C%22language_code%22%3A%22ru%22%2C%22allows_write_to_pm%22%3Atrue%7D&auth_date=1725901150&hash=3aae69485b8ed6a26ccffd2fa68904c2bb7df53140e14fd15701e89706c5691e"))
+    const { data, isLoading, error } = useSWR(get_URL('/auth/login'), (url) => fetcher(url, tg.initData))
 
 
     if (isLoading) {
