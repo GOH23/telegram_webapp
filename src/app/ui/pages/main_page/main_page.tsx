@@ -59,12 +59,12 @@ const CardData = [{
 
 export default function MainPage() {
     const [SelectedType, SetSelectedType] = useState(Types[0])
-
+    const {web_app,loadingState} = useConfig()
 
     return (
         <main className="min-h-dvh">
             <p >Выберите игру для показа товаров</p>
-            <FilterSelect onChange={() => SetSelectedType} SelectedGame={SelectedType} />
+            <FilterSelect web_app={web_app} onChange={() => SetSelectedType} SelectedGame={SelectedType} />
             {/* <textarea value={fallback.web_app.initData}/>
             <p className='text-white'>
                 {JSON.stringify(fallback.login_data)}

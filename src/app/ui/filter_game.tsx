@@ -6,13 +6,13 @@ import useSWR from "swr";
 import { fetcherGET, get_URL } from "./server_api/apiFetcher";
 import { useCloudService } from "./server_api/useCloudService";
 import { useConfig } from "./server_api/useConfig";
-export function FilterSelect({ onChange, SelectedGame }: {
+export function FilterSelect({ onChange, SelectedGame,web_app }: {
+    web_app: WebApp,
     onChange: Dispatch<SetStateAction<{
         id: number;
         name: string;
     }>>, SelectedGame: any
 }) {
-    const { web_app } = useConfig()
     const { data } = useSWR(get_URL('/games'), (url) => fetcherGET(url,useCloudService(web_app,"token")))
     web_app.showAlert(JSON.stringify(data))
     return (<Select
