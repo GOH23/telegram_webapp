@@ -7,15 +7,15 @@ import useSWR from "swr";
 import { fetcherGET, get_URL } from "./server_api/apiFetcher";
 import { useCloudService } from "./server_api/useCloudService";
 import { useConfig } from "./server_api/useConfig";
-export function FilterSelect({ onChange, SelectedGame,web_app }: {
-    web_app: WebApp,
+export function FilterSelect({ onChange, SelectedGame}: {
+
     onChange: Dispatch<SetStateAction<{
         id: number;
         name: string;
     }>>, SelectedGame: any
 }) {
-    const tokendata = useCloudService(web_app,"token")
-    const { data,isLoading,error } = useSWR(get_URL('/games'), (url) => fetcherGET(url,tokendata))
+    const {login_data : {token}} = useConfig()
+    const { data,isLoading,error } = useSWR(get_URL('/games'), (url) => fetcherGET(url,token))
     if(isLoading){ 
         return(<div>Skeleton</div>)
     }

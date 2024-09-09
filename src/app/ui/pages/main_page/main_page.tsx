@@ -64,7 +64,7 @@ export default function MainPage() {
     return (
         <main className="min-h-dvh">
             <p >Выберите игру для показа товаров</p>
-            <FilterSelect web_app={web_app} onChange={() => SetSelectedType} SelectedGame={SelectedType} />
+            <FilterSelect  onChange={() => SetSelectedType} SelectedGame={SelectedType} />
             {/* <textarea value={fallback.web_app.initData}/>
             <p className='text-white'>
                 {JSON.stringify(fallback.login_data)}
