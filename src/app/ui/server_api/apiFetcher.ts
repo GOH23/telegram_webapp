@@ -14,7 +14,7 @@ const fetcherUser = (url: string, data: string) => fetch(url, {
 const fetcherGET = (url: string, token: string) => fetch(url, {
     headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
+        Authorization: `Bearer ${token}`
     }
 }).then((res) => res.json())
 export {fetcherUser,fetcherGET,get_URL}
