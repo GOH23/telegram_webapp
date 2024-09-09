@@ -13,7 +13,7 @@ export function FilterSelect({ onChange, SelectedGame,web_app }: {
         name: string;
     }>>, SelectedGame: any
 }) {
-    const { data,isLoading } = useSWR(get_URL('/games'), (url) => fetcherGET(url,useCloudService(web_app,"token")))
+    const { data,isLoading,error } = useSWR(get_URL('/games'), (url) => fetcherGET(url,useCloudService(web_app,"token")))
     if(isLoading){ 
         return(<div>Skeleton</div>)
     }
@@ -41,5 +41,6 @@ export function FilterSelect({ onChange, SelectedGame,web_app }: {
 
     />
     <p>{JSON.stringify(data)}</p>
+    <p>{JSON.stringify(error)}</p>
     </>)
 }
