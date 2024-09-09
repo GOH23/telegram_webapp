@@ -5,21 +5,13 @@ import { SWRConfig } from 'swr'
 import useSWR from 'swr'
 import { initCloudStorage } from '@telegram-apps/sdk';
 import useSWRMutation from 'swr/mutation'
-import { get_URL } from "./get_user";
+import { fetcherUser, get_URL } from "./apiFetcher";
 
 
 const tg = window.Telegram.WebApp
 
 var authToken = window.localStorage.getItem("auth_key")
-const fetcher = (url: string, data: string) => fetch(url, {
-    method: "POST",
-    body: JSON.stringify({
-        initData: data
-    }),
-    headers: {
-        'Content-Type': 'application/json',
-    }
-}).then((res) => res.json())
+
 export default function AuthProvider({
     children,
 }: Readonly<{
@@ -27,16 +19,10 @@ export default function AuthProvider({
 }>) {
 
     //const { data, trigger } = useSWRMutation('/auth/login', PostFetcher)
-    const { data, isLoading, error } = useSWR(get_URL('/auth/login'), (url) => fetcher(url, tg.initData))
-
-
+    const { data, isLoading, error } = useSWR(get_URL('/auth/login'), (url) => fetcherUser(url, tg.initData))
     if (isLoading) {
         return (<div className='text-white text-center'>Loading...</div>)
     }
-    try {
-        tg.CloudStorage.setItem("token", data.token)
-    } catch (error) { }
-
     if (error) {
         return (<div className='text-white text-center'>Error...</div>)
     }

@@ -7,13 +7,15 @@ import { Types } from "../../types/types_for";
 import { FilterSelect } from "../../filter_game";
 import { IoClose } from "react-icons/io5";
 import axios from 'axios'
-import { useSWRConfig } from "swr";
+import useSWR, { useSWRConfig } from "swr";
 import clsx from "clsx";
 import { AnimatePresence, motion } from "framer-motion";
 import { ShopCartButton } from "./shopcartbutton";
 import { CardType } from "../../types/shop_cart_type";
 import { Badge } from "antd";
 import { useConfig } from "../../server_api/useConfig";
+import { useCloudService } from "../../server_api/useCloudService";
+import { fetcherGET, get_URL } from "../../server_api/apiFetcher";
 const CardData = [{
     id: 0,
     name: "60 примогемов",
@@ -57,7 +59,7 @@ const CardData = [{
 
 export default function MainPage() {
     const [SelectedType, SetSelectedType] = useState(Types[0])
-    const { web_app, login_data, loadingState } = useConfig()
+
 
     return (
         <main className="min-h-dvh">
