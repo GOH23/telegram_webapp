@@ -3,7 +3,7 @@ import { Card } from "@/app/ui/card";
 import { AwaitedReactNode, JSXElementConstructor, ReactElement, ReactNode, useEffect, useState } from "react";
 import { CgShoppingCart } from "react-icons/cg";
 import { borderAnimStyle } from "../../classname";
-import { Types } from "../../types/types_for";
+
 import { FilterSelect } from "../../filter_game";
 import { IoClose } from "react-icons/io5";
 import axios from 'axios'
@@ -11,69 +11,30 @@ import useSWR, { useSWRConfig } from "swr";
 import clsx from "clsx";
 import { AnimatePresence, motion } from "framer-motion";
 import { ShopCartButton } from "./shopcartbutton";
-import { CardType } from "../../types/shop_cart_type";
+
 import { Badge } from "antd";
 import { useConfig } from "../../server_api/useConfig";
 import { useGameData } from "../../server_api/useGameData";
 import { fetcherGET, get_URL } from "../../server_api/apiFetcher";
+import { CardType } from "../../types/types_for";
 
-const CardData = [{
-    id: 0,
-    name: "60 примогемов",
-    value: 10,
-    type: Types[0].name,
-    imagePath: "60-kristallov-1675329753.webp"
-},
-{
-    id: 1,
-    name: "300 примогемов",
-    value: 1000,
-    type: Types[0].name,
-    imagePath: "300-30-kristallov-1675590045.webp"
-},
-{
-    id: 2,
-    name: "1980 примогемов",
-    value: 1000,
-    type: Types[0].name,
-    imagePath: "1980-260-kristallov-1677645683.webp"
-},
-{
-    id: 3,
-    name: "",
-    value: "",
-    type: Types[0].name,
-    imagePath: "3280-600-kristallov-1675589200.webp"
-}, {
-    id: 4,
-    name: "",
-    value: "",
-    type: Types[0].name,
-    imagePath: ""
-}, {
-    id: 5,
-    name: "",
-    value: "",
-    type: Types[0].name,
-    imagePath: ""
-}]
+
 
 export default function MainPage() {
 
-    const {login_data : {token}} = useConfig()
-    const {isLoading,gameData} = useGameData(token)
+    const { login_data: { token } } = useConfig()
+    const { isLoading, gameData } = useGameData(token)
     const [SelectedType, SetSelectedType] = useState(0)
 
-    const { data,  error } = useSWR(()=>get_URL(`/product?name=${gameData[SelectedType]}`), (url) => fetcherGET(url, token))
+    const { data: products, error } = useSWR(() => get_URL(`/product?name=${gameData[SelectedType]}`), (url) => fetcherGET(url, token))
 
     return (
         <main className="min-h-dvh">
             <p >Выберите игру для показа товаров</p>
-            <FilterSelect  SelectedType={SelectedType} OnSetState={SetSelectedType} isLoading={isLoading} gameData={gameData} />
-            {!data ? <div>Загрузка</div> : <div>{JSON.stringify(data)}</div>}
+            <FilterSelect SelectedType={SelectedType} OnSetState={SetSelectedType} isLoading={isLoading} gameData={gameData} />
             <div className="flex flex-row pt-10 flex-wrap items-stretch justify-center  md:gap-5 gap-2">
-
-                {CardData.map((el, ind) => <Card {...el} key={ind}  value={Number(el.value)} />)}
+                {!products ? <div>Загрузка</div> : (products as CardType[]).map((el, ind) => <Card data={el}/>)}
+                {}
 
             </div>
             {/* <Badge count={5}>

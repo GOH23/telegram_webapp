@@ -5,8 +5,9 @@ import { FcDislike, FcLike } from "react-icons/fc";
 import { IconType } from "react-icons";
 
 import clsx from "clsx";
-import { CardType } from "./types/shop_cart_type";
+
 import { useConfig } from "./server_api/useConfig";
+import { CardType } from "./types/types_for";
 function AnimetedIcon({ IsStateOpened, SetStateOpened,Icon }: { IsStateOpened: boolean, SetStateOpened: (state: boolean) => void,Icon: IconType,ImagePath?: string }) {
     if (IsStateOpened) {
         return (<motion.div
@@ -22,7 +23,7 @@ function AnimetedIcon({ IsStateOpened, SetStateOpened,Icon }: { IsStateOpened: b
     }
 }
 
-export function Card({ value, name,imagePath }: { value: number, name: string,imagePath: string }) {
+export function Card({ data: {Name,Value} }: { data: CardType }) {
 
     const [SelectedCount, SetSelectedCount] = useState(0)
     const [IsSuccessOpened, SetIsSuccessOpened] = useState(false)
@@ -48,10 +49,10 @@ export function Card({ value, name,imagePath }: { value: number, name: string,im
         <AnimetedIcon IsStateOpened={IsSuccessOpened} Icon={FcLike} SetStateOpened={SetIsSuccessOpened} />
         <AnimetedIcon IsStateOpened={IsDeletedOpened} Icon={FcDislike} SetStateOpened={SetIsDeletedOpened} />
         <div className="p-2">
-            <img src={imagePath} alt={""} className="w-full h-42" />
-            <p className="text-white text-center font-bold min-h-5">{name}</p>
+            <img src={""} alt={""} className="w-full h-42" />
+            <p className="text-white text-center font-bold min-h-5">{Name}</p>
             <div className='flex h-10 flex-row justify-between text-white text-center font-bold'>
-                <div className="flex justify-center items-center"><p className=''>{value} руб</p></div>
+                <div className="flex justify-center items-center"><p className=''>{Value} руб</p></div>
                 <AnimatePresence>
                     {SelectedCount >= 1 && <motion.button
                         type='button'
