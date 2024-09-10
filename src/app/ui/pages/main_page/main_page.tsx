@@ -63,15 +63,16 @@ export default function MainPage() {
     const {login_data : {token}} = useConfig()
     const {isLoading,gameData} = useGameData(token)
     const [SelectedType, SetSelectedType] = useState(0)
-    //if(isLoading){return <div></div>}
-    //const { data,  error } = useSWR(get_URL(`/product?name=${gameData[SelectedType]}`), (url) => fetcherGET(url, token))
+
+    const { data,  error } = useSWR(()=>get_URL(`/product?name=${gameData[SelectedType]}`), (url) => fetcherGET(url, token))
 
     return (
         <main className="min-h-dvh">
             <p >Выберите игру для показа товаров</p>
             <FilterSelect  SelectedType={SelectedType} OnSetState={SetSelectedType} isLoading={isLoading} gameData={gameData} />
-
+            {!data ? <div>Загрузка</div> : <div>{JSON.stringify(data)}</div>}
             <div className="flex flex-row pt-10 flex-wrap items-stretch justify-center  md:gap-5 gap-2">
+
                 {CardData.map((el, ind) => <Card {...el} key={ind}  value={Number(el.value)} />)}
 
             </div>
