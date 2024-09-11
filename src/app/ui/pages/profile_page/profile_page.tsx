@@ -12,7 +12,7 @@ export function ProfilePage() {
     const { web_app, login_data, loadingState } = useConfig()
 
     return <main className={'min-h-dvh text-white'}>
-        <div className={'bg-stone-900 h-auto mx-2 mt-2 rounded-2xl p-2 opacity-60 blur-lg'}>
+        <div className={'bg-stone-900 h-auto mx-2 mt-2 rounded-2xl p-2 backdrop-filter backdrop-grayscale backdrop-blur-md backdrop-contrast-200'}>
             <p >Ваши данные</p>
             <p >Ваш никнейм:</p>
             <p >{login_data.user.username}</p>
