@@ -17,6 +17,7 @@ import { useConfig } from "../../server_api/useConfig";
 import { useGameData } from "../../server_api/useGameData";
 import { fetcherGET, get_URL } from "../../server_api/apiFetcher";
 import { CardType } from "../../types/types_for";
+import { LoadingComponent } from "../../loadingComponent";
 
 
 
@@ -33,7 +34,7 @@ export default function MainPage() {
             <p >Выберите игру для показа товаров</p>
             <FilterSelect SelectedType={SelectedType} OnSetState={SetSelectedType} isLoading={isLoading} gameData={gameData} />
             <div className="flex flex-row pt-10 flex-wrap items-stretch justify-center  md:gap-5 gap-2">
-                {!products ? <div>Загрузка</div> : (products as CardType[]).map((el, ind) => <Card data={el}/>)}
+                {!products ? <LoadingComponent/> : (products as CardType[]).map((el, ind) => <Card data={el}/>)}
                 {}
 
             </div>

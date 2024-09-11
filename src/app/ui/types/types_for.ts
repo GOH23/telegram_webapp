@@ -1,12 +1,20 @@
 
 type LoginType = {
     token: string,
-    user: any
+    user: UserType
 }
 type ContextType = {
     loadingState: boolean,
     web_app: WebApp,
-    login_data: { token: string,user: any}
+    login_data: LoginType
+}
+type UserType ={
+    userId: number;
+    allowsWriteToPm: boolean
+    firstname: string
+    languageCode: string
+    username: string
+    roles: string
 }
 type CardType = {
     productId: string,

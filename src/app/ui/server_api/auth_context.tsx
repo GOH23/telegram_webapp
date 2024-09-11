@@ -6,6 +6,7 @@ import useSWR from 'swr'
 import { initCloudStorage } from '@telegram-apps/sdk';
 import useSWRMutation from 'swr/mutation'
 import { fetcherUser, get_URL } from "./apiFetcher";
+import { LoadingComponent } from "../loadingComponent";
 
 
 const tg = window.Telegram.WebApp
@@ -21,7 +22,7 @@ export default function AuthProvider({
     //const { data, trigger } = useSWRMutation('/auth/login', PostFetcher)
     const { data, isLoading, error } = useSWR(get_URL('/auth/login'), (url) => fetcherUser(url, tg.initData))
     if (isLoading) {
-        return (<div className='text-white text-center'>Loading...</div>)
+        return (<LoadingComponent/>)
     }
     if (error) {
         return (<div className='text-white text-center'>Error...</div>)
