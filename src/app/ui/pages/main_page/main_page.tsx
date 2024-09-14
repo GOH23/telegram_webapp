@@ -35,9 +35,7 @@ export default function MainPage() {
             <p >Выберите игру для показа товаров</p>
             <FilterSelect SelectedType={SelectedType} OnSetState={SetSelectedType} isLoading={isLoading} gameData={gameData} />
             <div className="flex flex-row pt-10 flex-wrap items-stretch justify-center  md:gap-5 gap-2">
-                {!products ? <LoadingPage/> : (products as CardType[]).map((el, ind) => <Card data={el}/>)}
-                {}
-
+                {!products ? <LoadingPage/> : (products as CardType[]).map((el, ind) => <Card key={ind} data={el}/>)}
             </div>
             {/* <Badge count={5}>
                 <div className={'fixed bottom-0 right-0 cursor-pointer m-5 text-6xl p-2 text-white bg-slate-700 size-auto flex rounded-xl z-50' + borderAnimStyle}>

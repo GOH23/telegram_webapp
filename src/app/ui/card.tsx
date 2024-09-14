@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react"
-import { animatedShadow, borderAnimStyle } from "./classname";
+import { useState } from "react"
+import { borderAnimStyle } from "./classname";
 import { AnimatePresence, motion } from 'framer-motion'
 import { FcDislike, FcLike } from "react-icons/fc";
 import { IconType } from "react-icons";
@@ -8,6 +8,7 @@ import clsx from "clsx";
 
 import { useConfig } from "./server_api/useConfig";
 import { CardType } from "./types/types_for";
+import { fetcherOther, get_URL } from "./server_api/apiFetcher";
 function AnimetedIcon({ IsStateOpened, SetStateOpened,Icon }: { IsStateOpened: boolean, SetStateOpened: (state: boolean) => void,Icon: IconType,ImagePath?: string }) {
     if (IsStateOpened) {
         return (<motion.div
@@ -23,37 +24,35 @@ function AnimetedIcon({ IsStateOpened, SetStateOpened,Icon }: { IsStateOpened: b
     }
 }
 
-export function Card({ data: {Name,Value} }: { data: CardType }) {
+export function Card({ data: {Name,Value,Image,productId} }: { data: CardType }) {
 
-    const [SelectedCount, SetSelectedCount] = useState(0)
+
     const [IsSuccessOpened, SetIsSuccessOpened] = useState(false)
     const [IsDeletedOpened, SetIsDeletedOpened] = useState(false)
-    const { web_app } = useConfig()
+    const { web_app,login_data: {token} } = useConfig()
 
     return (<motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         className={clsx(
             'rounded h-auto bg-stone-900  cursor-pointer relative z-10 w-44 max-w-44',
-            animatedShadow
         )}
         onClick={() => {
             SetIsSuccessOpened(true)
-            web_app?.sendData(JSON.stringify({
-                result: "flex flex-row pt-10 flex-wrap items-stretch justify-center  md:gap-5 gap-2"
-            }))
-            web_app?.close()
+            fetcherOther(get_URL('/product/webcallback'), {
+                id: productId
+            }, 'POST', token)
         }}
     >
         
         <AnimetedIcon IsStateOpened={IsSuccessOpened} Icon={FcLike} SetStateOpened={SetIsSuccessOpened} />
         <AnimetedIcon IsStateOpened={IsDeletedOpened} Icon={FcDislike} SetStateOpened={SetIsDeletedOpened} />
-        <div className="p-2">
-            <img src={""} alt={""} className="max-h-64 aspect-square" />
+        <div className="p-2 box-shadow-with-hover">
+            <img src={get_URL(`/images/image/${Image?.imagePath}`)} alt={""} className="max-h-64 aspect-square object-contain" />
             <p className="text-white text-center font-bold min-h-5">{Name}</p>
             <div className='flex h-10 flex-row justify-between text-white text-center font-bold'>
                 <div className="flex justify-center items-center"><p className=''>{Value} руб</p></div>
-                <AnimatePresence>
+                {/* <AnimatePresence>
                     {SelectedCount >= 1 && <motion.button
                         type='button'
                         className={'bg-cyan-600 w-10 h-10 flex justify-center items-center rounded-lg ' + borderAnimStyle}
@@ -69,7 +68,7 @@ export function Card({ data: {Name,Value} }: { data: CardType }) {
                         }}>
                         <p>-</p>
                     </motion.button>}
-                </AnimatePresence>
+                </AnimatePresence> */}
             </div>
             {/* <AnimatePresence>
                 {SelectedCount != 0 &&

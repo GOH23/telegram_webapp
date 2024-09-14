@@ -1,18 +1,21 @@
-import { Form, Select, Button, FormProps,Input } from "antd"
+import { Form, Select, Button, FormProps, Input } from "antd"
 import { LoginType } from "../../types/types_for";
 import { useGameData, useImages } from "../../server_api/useApi";
+import { fetcherOther, get_URL } from "../../server_api/apiFetcher";
 
 type AddProductForm = {
     Name: string,
     Value: number,
-    TypeName: string
+    TypeName: string,
+    ImagePath: string,
 }
 const { Option } = Select
-export default function AddProduct({login_data: {token}}:{login_data: LoginType}) {
+export default function AddProduct({ login_data: { token } }: { login_data: LoginType }) {
     const { isLoading, gameData } = useGameData(token)
-
+    const { isLoading: IsLoadingImage, imageData } = useImages(token)
     const onFinish: FormProps<AddProductForm>['onFinish'] = (values) => {
-        console.log('Success:', values);
+        fetcherOther(get_URL('/product'), values, "POST", token)
+        window.location.reload()
     };
     const onFinishFailed: FormProps<AddProductForm>['onFinishFailed'] = (errorInfo) => {
         console.log('Failed:', errorInfo);
@@ -21,12 +24,10 @@ export default function AddProduct({login_data: {token}}:{login_data: LoginType}
 
         <p className='text-center'>Добавить товар</p>
         <Form
-
             name="basic"
             labelCol={{ span: 8 }}
             wrapperCol={{ span: 16 }}
             style={{ maxWidth: 600 }}
-
             initialValues={{ remember: true }}
             onFinish={onFinish}
             onFinishFailed={onFinishFailed}
@@ -61,11 +62,11 @@ export default function AddProduct({login_data: {token}}:{login_data: LoginType}
             </Form.Item>
             <Form.Item<AddProductForm>
                 label="Изображение товара"
-                name='TypeName'
+                name="ImagePath"
             >
-                {isLoading ? <div>Загрузка</div> : <Select>
-                    {gameData.map((el) => {
-                        return (<Option key={el.gameId}>{el.gameName}</Option>)
+                {IsLoadingImage ? <div>Загрузка</div> : <Select>
+                    {imageData.map((el) => {
+                        return (<Option key={el.imagePath}>{el.imagePath}</Option>)
                     })}
                 </Select>}
 

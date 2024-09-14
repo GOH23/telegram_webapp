@@ -1,8 +1,7 @@
 import clsx from "clsx";
-import { animatedShadow } from "../../classname";
 
 export function DataCard({ImageSource,GameName}:{ImageSource: string,GameName: string}) {
-    return <div className={'bg-stone-900 h-32 mx-2 mt-2 rounded-2xl p-3 bg-opacity-50 backdrop-filter  backdrop-blur-md'}>
+    return <div className={'bg-stone-900 h-32 mx-2 mt-2 rounded-2xl p-3 bg-opacity-50 backdrop-filter backdrop-blur-md box_shadow2'}>
         <div className={clsx(
             'flex items-center h-full gap-5'
         )}>
