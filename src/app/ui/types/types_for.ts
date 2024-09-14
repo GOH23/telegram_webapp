@@ -1,3 +1,4 @@
+import { gameType } from "../server_api/useApi"
 
 type LoginType = {
     token: string,
@@ -21,9 +22,6 @@ type CardType = {
     Name: string,
     ImagePath: string,
     Value: number,
-    Type: {
-        gameId: number,
-        gameName: number
-    }
+    Type: gameType
 }
 export type {LoginType,ContextType,CardType}

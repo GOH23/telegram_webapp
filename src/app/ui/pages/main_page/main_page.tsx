@@ -14,10 +14,11 @@ import { ShopCartButton } from "./shopcartbutton";
 
 import { Badge } from "antd";
 import { useConfig } from "../../server_api/useConfig";
-import { useGameData } from "../../server_api/useGameData";
+import { useGameData } from "../../server_api/useApi";
 import { fetcherGET, get_URL } from "../../server_api/apiFetcher";
 import { CardType } from "../../types/types_for";
-import { LoadingComponent } from "../../loadingComponent";
+import { LoadingPage } from "../LoadingPage";
+
 
 
 
@@ -27,14 +28,14 @@ export default function MainPage() {
     const { isLoading, gameData } = useGameData(token)
     const [SelectedType, SetSelectedType] = useState(0)
 
-    const { data: products, error } = useSWR(() => get_URL(`/product?name=${gameData[SelectedType]}`), (url) => fetcherGET(url, token))
+    const { data: products, error } = useSWR(() => get_URL(`/product?name=${gameData[SelectedType].gameName}`), (url) => fetcherGET(url, token))
 
     return (
         <main className="min-h-dvh">
             <p >Выберите игру для показа товаров</p>
             <FilterSelect SelectedType={SelectedType} OnSetState={SetSelectedType} isLoading={isLoading} gameData={gameData} />
             <div className="flex flex-row pt-10 flex-wrap items-stretch justify-center  md:gap-5 gap-2">
-                {!products ? <LoadingComponent/> : (products as CardType[]).map((el, ind) => <Card data={el}/>)}
+                {!products ? <LoadingPage/> : (products as CardType[]).map((el, ind) => <Card data={el}/>)}
                 {}
 
             </div>

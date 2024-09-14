@@ -1,14 +1,34 @@
 const get_URL = (pathUrl?: string) => {
     return `https://1640350c0d13.vps.myjino.ru/api/v1${pathUrl}`
 }
-const fetcherUser = (url: string, data: string) => fetch(url, {
-    method: "POST",
+const fetcherFile = (url: string, data: FormData, fetchType: "POST" | "DELETE" = "POST", authToken?: string) => fetch(url, {
+    method: fetchType,
+    body: data,
+    headers: authToken ? {
+        Authorization: `Bearer ${authToken}`
+    } : {
+    }
+}).then((res) => res.json())
+const fetcherOther = (url: string, data: any, fetchType: "POST" | "DELETE" = "POST", authToken?: string) => fetch(url, {
+    method: fetchType,
+    body: JSON.stringify(data),
+    headers: authToken ? {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${authToken}`
+    } : {
+        'Content-Type': 'application/json',
+    }
+}).then((res) => res.json())
+const fetcher = (url: string, data: string, fetchType: "POST" | "DELETE" = "POST", authToken?: string) => fetch(url, {
+    method: fetchType,
     body: JSON.stringify({
         initData: data
     }),
-    headers: {
+    headers: authToken ? {
         'Content-Type': 'application/json',
-
+        Authorization: `Bearer ${authToken}`
+    } : {
+        'Content-Type': 'application/json',
     }
 }).then((res) => res.json())
 const fetcherGET = (url: string, token: string) => fetch(url, {
@@ -17,4 +37,4 @@ const fetcherGET = (url: string, token: string) => fetch(url, {
         Authorization: `Bearer ${token}`
     }
 }).then((res) => res.json())
-export {fetcherUser,fetcherGET,get_URL}
+export { fetcher, fetcherGET,fetcherOther,fetcherFile, get_URL }

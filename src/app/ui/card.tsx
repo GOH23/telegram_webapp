@@ -49,7 +49,7 @@ export function Card({ data: {Name,Value} }: { data: CardType }) {
         <AnimetedIcon IsStateOpened={IsSuccessOpened} Icon={FcLike} SetStateOpened={SetIsSuccessOpened} />
         <AnimetedIcon IsStateOpened={IsDeletedOpened} Icon={FcDislike} SetStateOpened={SetIsDeletedOpened} />
         <div className="p-2">
-            <img src={""} alt={""} className="w-full h-42" />
+            <img src={""} alt={""} className="max-h-64 aspect-square" />
             <p className="text-white text-center font-bold min-h-5">{Name}</p>
             <div className='flex h-10 flex-row justify-between text-white text-center font-bold'>
                 <div className="flex justify-center items-center"><p className=''>{Value} руб</p></div>

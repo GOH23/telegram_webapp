@@ -2,7 +2,7 @@
 import { Select } from "antd"
 import { Dispatch, SetStateAction } from "react"
 import clsx from "clsx"
-import { gameType } from "./server_api/useGameData"
+import { gameType } from "./server_api/useApi"
 export function FilterSelect({ isLoading,gameData,OnSetState,SelectedType}: {
 
     isLoading: boolean,gameData: gameType[],OnSetState: (num: number)=>void,SelectedType: number
