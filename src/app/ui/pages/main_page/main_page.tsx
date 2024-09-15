@@ -54,11 +54,13 @@ export default function MainPage() {
                 <IoGameController />
             </div>
             <ModalSelectGame
-                
+                SelectedType={SelectedType}
+                SetSelectedType={SetSelectedType}
                 gameData={gameData}
                 isLoading={isLoading}
                 isModalOpen={isModalOpen}
-                handleOk={handleOk} handleCancel={handleCancel} />
+                handleOk={handleOk}
+                handleCancel={handleCancel} />
             {/* <Modal wrapClassName="bg_purple blur_bg" title="Выберите категорию игры" centered loading={isLoading} open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
                 <p className='absolute top-0 text-white'>S</p>
                 {isLoading ? <div></div> : gameData.map((el) => {
