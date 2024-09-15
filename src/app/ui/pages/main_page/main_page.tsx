@@ -50,7 +50,7 @@ export default function MainPage() {
             <div className="flex flex-row pt-10 flex-wrap items-stretch justify-center  md:gap-5 gap-2">
                 {!products ? <LoadingPage /> : (products as CardType[]).map((el, ind) => <Card key={ind} data={el} />)}
             </div>
-            <div className=' border-t-2 w-fit rounded-e-md bg_purple text-white cursor-pointer h-fit border-r-2 border-b-2 fixed top-0 bottom-0 my-auto translate-y-1/2 p-2 text-5xl ' onClick={showModal}>
+            <div className=' z-50 border-t-2 w-fit rounded-e-md bg_purple text-white cursor-pointer h-fit border-r-2 border-b-2 fixed top-0 bottom-0 my-auto translate-y-1/2 p-2 text-5xl ' onClick={showModal}>
                 <IoGameController />
             </div>
             <ModalSelectGame
