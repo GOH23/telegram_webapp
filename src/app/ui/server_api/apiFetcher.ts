@@ -1,4 +1,6 @@
 const get_URL = (pathUrl?: string) => {
+    //https://1640350c0d13.vps.myjino.ru
+    //http://localhost:3001
     return `https://1640350c0d13.vps.myjino.ru/api/v1${pathUrl}`
 }
 const fetcherFile = (url: string, data: FormData, fetchType: "POST" | "DELETE" = "POST", authToken?: string) => fetch(url, {

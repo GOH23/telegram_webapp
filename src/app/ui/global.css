@@ -18,6 +18,13 @@
 .text_purple{
     color: #7300F3;
 }
+.bg_purple{
+    background-color: #7300F3;
+}
+.blur_bg{
+    background-color: #7100f371;
+    backdrop-filter:  blur(10px);
+}
 .box_shadow{
     box-shadow: 2px 2px 2px 1px #7300F3;
 }
